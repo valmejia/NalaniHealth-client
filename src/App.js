@@ -11,7 +11,8 @@ import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
 import MealPlan from "./pages/MealPlan";
 import FoodShoppingList from "./pages/FoodShoppingList";
-import RecipeIdeas from "./pages/RecipeIdeas";
+import RecipeIdeasList from "./pages/RecipesIdeasList";
+import RecipeIdeasForm from "./pages/RecipeIdeasForm";
 import FoodExpensesTracker from "./pages/FoodExpensesTracker";
 import NutritionGoalTracker from "./pages/NutritionGoalTracker";
 import InspirationBoard from "./pages/InspirationBoard";
@@ -72,7 +73,8 @@ export default function App() {
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/mealplan" element={<MealPlan />} />
         <Route path="/foodShoppingList" element={<FoodShoppingList />} />
-        <Route path="/recipeideas" element={<RecipeIdeas />} />
+        <Route path="/recipeideaslist" element={<RecipeIdeasList />} />
+        <Route path="/recipeideasform" element={<RecipeIdeasForm />} />
         <Route path="/foodExpensesTracker" element={<FoodExpensesTracker />} />
         <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
         <Route path="/inspirationBoard" element={<InspirationBoard />} />

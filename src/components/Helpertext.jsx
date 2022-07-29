@@ -12,7 +12,7 @@ export default function HelperText() {
     <LocalizationProvider dateAdapter={AdapterDateFns} >
       <DatePicker
         color='black'
-        label="Helper text example"
+        label="Week"
         value={value}
         onChange={(newValue) => {
           setValue(newValue);

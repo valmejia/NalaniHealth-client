@@ -16,7 +16,7 @@ const Navbar = (props) => {
       >
         <Toolbar sx={{ flexWrap: 'wrap' }}>
           <Typography variant="h4" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-          <h4> Nalani Health</h4>
+           Nalani Health
           </Typography>        
           <Button href="/auth/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
             Login
