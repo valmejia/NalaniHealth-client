@@ -1,14 +1,8 @@
-import "../App.css";
 import * as React from "react";
-import TextField from "@mui/material/TextField";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Button from "@mui/material/Button";
+import { Grid, InputLabel, Button, Select, Typography, MenuItem, FormControl, Box, Container, TextField} from "@mui/material";
+
+
+
 
 function RecipeIdeasForm() {
   const [age, setAge] = React.useState("");
@@ -19,7 +13,9 @@ function RecipeIdeasForm() {
   return (
     <Container>
       <Grid>
-        <h1> Recipes </h1>
+      <Typography variant="h4" >
+           Recipes
+        </Typography> 
         <Grid>
           <TextField
             id="outlined-textarea"

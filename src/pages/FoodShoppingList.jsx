@@ -1,4 +1,3 @@
-import "../App.css";
 import TextField from "@mui/material/TextField";
 import HelperText from "../components/Helpertext";
 import Table from "@mui/material/Table";
@@ -14,9 +13,9 @@ import { Grid } from "@mui/material";
 
 function FoodShoppingList(){
  return(
-    <div> 
+    <Container> 
         <h1> Food Shopping List</h1>
-    </div>
+    </Container>
  )
 }
 export default FoodShoppingList;

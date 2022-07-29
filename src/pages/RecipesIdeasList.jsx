@@ -1,10 +1,9 @@
-import "../App.css";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 function RecipeIdeasList() {
   return (
     <Grid>
-      <h1>Recipes Ideas List</h1>
+      <Typography>Recipes Ideas List</Typography>
     </Grid>
   );
 }

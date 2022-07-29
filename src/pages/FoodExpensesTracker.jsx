@@ -1,6 +1,3 @@
-import "../App.css";
-
-import TextField from "@mui/material/TextField";
 import HelperText from "../components/Helpertext";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,10 +6,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Grid, Container, TextField, Button} from "@mui/material";
+
 
 function FoodExpensesTracker() {
   return (

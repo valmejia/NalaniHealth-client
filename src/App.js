@@ -17,6 +17,62 @@ import FoodExpensesTracker from "./pages/FoodExpensesTracker";
 import NutritionGoalTracker from "./pages/NutritionGoalTracker";
 import InspirationBoard from "./pages/InspirationBoard";
 import Favoritos from "./pages/Favoritos";
+import WelcomeHomePage from "./pages/WelcomeHomePage";
+import { ThemeProvider} from "@emotion/react";
+import { createTheme } from "@mui/material";
+
+const theme = createTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#6a1b9a',
+    },
+    secondary: {
+      main: '#8e24aa',
+    },
+    text: {
+      primary: '#4527a0',
+    },
+  },
+  background: {
+    default: '#dbdaff',
+  },
+  typography: {
+    h1: {
+      fontFamily: 'Italianno',
+    },
+    h3: {
+      fontFamily: 'Rampart One',
+    },
+    h4: {
+      fontFamily: 'Rampart One',
+    },
+    h2: {
+      fontFamily: 'Poppins',
+    },
+    h5: {
+      fontFamily: 'Poppins',
+    },
+    h6: {
+      fontFamily: 'Poppins',
+    },
+    subtitle1: {
+      fontFamily: 'Poppins',
+    },
+    body2: {
+      fontFamily: 'Poppins',
+    },
+    button: {
+      fontFamily: 'Poppins',
+    },
+    caption: {
+      fontFamily: 'Poppins',
+    },
+    overline: {
+      fontFamily: 'Poppins',
+    },
+  },
+});
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -61,8 +117,13 @@ export default function App() {
   if (isLoading) {
     return <LoadingComponent />;
   }
+
+
   return (
     <div>
+
+      <ThemeProvider theme={theme}>
+
       
       <Routes>
         {/* {routes({ user, authenticate, handleLogout }).map((route) => (
@@ -71,15 +132,18 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/auth/login" element={<LogIn />} />
         <Route path="/auth/signup" element={<Signup />} />
-        <Route path="/mealplan" element={<MealPlan />} />
+        <Route path="/mealPlan" element={<MealPlan />} />
         <Route path="/foodShoppingList" element={<FoodShoppingList />} />
-        <Route path="/recipeideaslist" element={<RecipeIdeasList />} />
-        <Route path="/recipeideasform" element={<RecipeIdeasForm />} />
+        <Route path="/recipeIdeasList" element={<RecipeIdeasList />} />
+        <Route path="/recipeIdeasForm" element={<RecipeIdeasForm />} />
         <Route path="/foodExpensesTracker" element={<FoodExpensesTracker />} />
         <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
         <Route path="/inspirationBoard" element={<InspirationBoard />} />
         <Route path="/favoritos" element={<Favoritos />} />
+        <Route path="/WelcomeHomePage" element={<WelcomeHomePage />} />
       </Routes>
+
+      </ThemeProvider>
     </div>
   );
 }

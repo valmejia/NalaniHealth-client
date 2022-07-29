@@ -1,4 +1,3 @@
-import "../App.css";
 import TextField from "@mui/material/TextField";
 import HelperText from "../components/Helpertext";
 import Table from "@mui/material/Table";
@@ -26,13 +25,10 @@ function MealPlan() {
   ];
 
   return (
-    <Container
-      component="main"
-      sx={{ fontFamily: "Poppins, sans-serif", color: "orange" }}
-    >
-      <div>
+    <Container>
+      
         <h1> Meal Plan </h1>
-      </div>
+      
       <Box
       sx={{
         display: 'flex',
