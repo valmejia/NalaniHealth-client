@@ -1,21 +1,21 @@
-import { Container, Typography, CssBaseline } from "@mui/material";
-
-function InspirationBoard() {
+import { CssBaseline, Typography,Container } from "@mui/material";
+function Favorites() {
   return (
     <Container>
-        <CssBaseline/>
+      <CssBaseline />
       <Typography
         component="h1"
         variant="h4"
         sx={{
           marginTop: 4,
           variant: "container",
+          marginBottom: 4,
         }}
       >
-        Inspiration Board
+        Favorites
       </Typography>
     </Container>
   );
 }
 
-export default InspirationBoard;
+export default Favorites;

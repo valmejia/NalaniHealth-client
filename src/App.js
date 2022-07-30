@@ -16,7 +16,7 @@ import RecipeIdeasForm from "./pages/RecipeIdeasForm";
 import FoodExpensesTracker from "./pages/FoodExpensesTracker";
 import NutritionGoalTracker from "./pages/NutritionGoalTracker";
 import InspirationBoard from "./pages/InspirationBoard";
-import Favoritos from "./pages/Favoritos";
+import Favorites from "./pages/Favorites";
 import WelcomeHomePage from "./pages/WelcomeHomePage";
 import { ThemeProvider} from "@emotion/react";
 import { createTheme } from "@mui/material";
@@ -33,9 +33,9 @@ const theme = createTheme({
     text: {
       primary: '#4527a0',
     },
-  },
-  background: {
-    default: '#dbdaff',
+    background: {
+      default: '#dbdaff',
+    },
   },
   typography: {
     h1: {
@@ -139,7 +139,7 @@ export default function App() {
         <Route path="/foodExpensesTracker" element={<FoodExpensesTracker />} />
         <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
         <Route path="/inspirationBoard" element={<InspirationBoard />} />
-        <Route path="/favoritos" element={<Favoritos />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/WelcomeHomePage" element={<WelcomeHomePage />} />
       </Routes>
 

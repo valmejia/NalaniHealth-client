@@ -7,15 +7,25 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import { Grid, Container, TextField, Button} from "@mui/material";
+import { Grid, Container, TextField, Button, CssBaseline, Typography} from "@mui/material";
 
 
 function FoodExpensesTracker() {
   return (
     <Container>
-      <Grid>
-        <h1> Food Expenses Tracker </h1>
-        <Grid>
+      <CssBaseline />
+      
+      <Typography 
+        component="h1"
+        variant="h4"
+        sx={{
+          marginTop: 4,
+          variant: "container",
+          marginBottom: 4,
+        }}
+      >
+       Food Expenses Tracker 
+        </Typography>
           <HelperText />
           <TextField
             id="outlined-textarea"
@@ -24,11 +34,11 @@ function FoodExpensesTracker() {
             multiline
           />
 
-          <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+          <Button href="#" variant="contained" sx={{ my: 1, mx: 1.5 }}>
             Add
           </Button>
-        </Grid>
-      </Grid>
+       
+      
     </Container>
   );
 }

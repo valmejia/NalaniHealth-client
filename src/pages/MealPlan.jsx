@@ -8,8 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
-import Box from '@mui/material/Box';
-import { Grid } from "@mui/material";
+import Box from "@mui/material/Box";
+import { Grid, Typography, CssBaseline } from "@mui/material";
 
 function MealPlan() {
   function createData(name, calories, fat, carbs, protein) {
@@ -26,31 +26,45 @@ function MealPlan() {
 
   return (
     <Container>
-      
-        <h1> Meal Plan </h1>
-      
-      <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-       
-      }}
+      <CssBaseline />
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          marginTop: 4,
+          variant: "container",
+        }}
       >
-        <Grid >
+        Meal Plan
+      </Typography>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
+        }}
+      >
+        <Grid>
           <TextField
             id="outlined-textarea"
             label="Assessment"
             placeholder="Assessment:"
-            multiline 
-            
+            multiline
           />
           <HelperText />
         </Grid>
       </Box>
 
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table
+          sx={{
+            
+            marginTop: 4,
+            variant: "container",
+          }}
+          aria-label="simple table"
+        >
           <TableHead>
             <TableRow>
               <TableCell align="center"></TableCell>
@@ -72,12 +86,35 @@ function MealPlan() {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
+
                 <TableCell align="right">
                   <TextField />
                 </TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+
+                <TableCell align="right">
+                  <TextField />
+                </TableCell>
+
+                <TableCell align="right">
+                  <TextField />
+                </TableCell>
+
+                <TableCell align="right">
+                  <TextField />
+                </TableCell>
+
+                <TableCell align="right">
+                  <TextField />
+                </TableCell>
+
+                <TableCell align="right">
+                  <TextField />
+                </TableCell>
+
+                <TableCell align="right">
+                  <TextField />
+                </TableCell>
+
               </TableRow>
             ))}
           </TableBody>

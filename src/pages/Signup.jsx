@@ -125,7 +125,7 @@ export default function SignUp() {
             alignItems: "center",
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h3">
             Sign up
           </Typography>
 
