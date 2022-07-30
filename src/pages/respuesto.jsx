@@ -11,7 +11,6 @@ import {
   Box,
   Typography,
   Container,
-  Paper,
 } from "@mui/material";
 
 import "./auth.css";
@@ -38,8 +37,8 @@ export default function Signup({ authenticate }) {
     const credentials = {
       username,
       password,
-      fullname,
       email,
+      fullname,
     };
     signup(credentials).then((res) => {
       if (!res.status) {
@@ -117,7 +116,7 @@ export default function Signup({ authenticate }) {
               label="User Name"
               name="username"
               autoComplete="username"
-              
+              placeholder="Text"
               value={username}
               onChange={handleInputChange}
               required
