@@ -5,18 +5,19 @@ import {
   CssBaseline,
   Typography,
   IconButton,
-  AppBar,
   Toolbar,
+  Avatar, 
+  Grid,
+  Paper
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
 
-function WelcomeHomePage() {
+
+function WelcomeHomePage(props) {
+  const {user, handleLogout} = props;
   return (
     <Container>
       <CssBaseline />
-
       <Toolbar sx={{ flexWrap: "wrap" }}>
         <Typography
           component="h1"
@@ -27,7 +28,7 @@ function WelcomeHomePage() {
             flexGrow: 1,
           }}
         >
-          Welcome user!
+          Welcome {user?.fullname} 
         </Typography>
 
         <Button
@@ -38,9 +39,20 @@ function WelcomeHomePage() {
         >
           Favorites
         </Button>
-      </Toolbar>
 
-     
+        <Button 
+        variant="contained"
+        sx={{ my: 1, mx: 1.5 }}
+        onClick={handleLogout}
+        >
+          LogOut
+        </Button>
+
+        <IconButton  href="/UserHome" sx={{ my: 1, mx: 1.5 }}>
+          <Avatar  src="/broken-image.jpg" />
+        </IconButton>
+
+      </Toolbar>
 
       <Box
         sx={{
@@ -105,6 +117,7 @@ function WelcomeHomePage() {
           Inspiration board
         </Button>
       </Box>
+     
     </Container>
   );
 }

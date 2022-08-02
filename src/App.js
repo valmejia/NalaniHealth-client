@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import { getLoggedIn, logout } from "./services/auth";
 import routes from "./config/routes";
 import * as USER_HELPERS from "./utils/userToken";
 
 //pages 
+import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
@@ -20,6 +21,7 @@ import Favorites from "./pages/Favorites";
 import WelcomeHomePage from "./pages/WelcomeHomePage";
 import { ThemeProvider} from "@emotion/react";
 import { createTheme } from "@mui/material";
+import UserHome from "./pages/UserHome";
 
 const theme = createTheme({
   palette: {
@@ -77,6 +79,7 @@ const theme = createTheme({
 export default function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const accessToken = USER_HELPERS.getUserToken();
@@ -93,6 +96,7 @@ export default function App() {
   }, []);
 
   function handleLogout() {
+    console.log('holi')
     const accessToken = USER_HELPERS.getUserToken();
     if (!accessToken) {
       setUser(null);
@@ -106,6 +110,7 @@ export default function App() {
       }
       USER_HELPERS.removeUserToken();
       setIsLoading(false);
+      navigate('/')
       return setUser(null);
     });
   }
@@ -124,14 +129,15 @@ export default function App() {
 
       <ThemeProvider theme={theme}>
 
-      
+      {/* <Navbar handleLogout={handleLogout} user={user} /> */}
+
       <Routes>
         {/* {routes({ user, authenticate, handleLogout }).map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))} */}
         <Route path="/" element={<HomePage />} />
-        <Route path="/auth/login" element={<LogIn />} />
-        <Route path="/auth/signup" element={<Signup />} />
+        <Route path="/auth/login" element={<LogIn  authenticate={authenticate} />} />
+        <Route path="/auth/signup" element={<Signup authenticate={authenticate} />} />
         <Route path="/mealPlan" element={<MealPlan />} />
         <Route path="/foodShoppingList" element={<FoodShoppingList />} />
         <Route path="/recipeIdeasList" element={<RecipeIdeasList />} />
@@ -140,7 +146,8 @@ export default function App() {
         <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
         <Route path="/inspirationBoard" element={<InspirationBoard />} />
         <Route path="/favorites" element={<Favorites />} />
-        <Route path="/WelcomeHomePage" element={<WelcomeHomePage />} />
+        <Route path="/WelcomeHomePage" element={<WelcomeHomePage handleLogout={handleLogout} user={user} />} />
+        <Route path="/UserHome" element={<UserHome  user={user}/>} />
       </Routes>
 
       </ThemeProvider>

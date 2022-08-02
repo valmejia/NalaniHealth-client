@@ -13,6 +13,8 @@ import {
   Box,
   Typography,
   Container,
+  Alert,
+  AlertTitle,
 } from "@mui/material";
 
 export default function LogIn({ authenticate }) {
@@ -42,7 +44,7 @@ export default function LogIn({ authenticate }) {
       }
       USER_HELPERS.setUserToken(res.data.accessToken);
       authenticate(res.data.user);
-      navigate(PATHS.HOMEPAGE);
+      navigate('/WelcomeHomePage');
     });
   }
 
@@ -77,7 +79,7 @@ export default function LogIn({ authenticate }) {
         <Typography component="h1" variant="h3">
           Log In
         </Typography>
-       
+
         <Box
           component="form"
           onSubmit={handleFormSubmission}
@@ -112,10 +114,12 @@ export default function LogIn({ authenticate }) {
           />
 
           {error && (
-            <div className="error-block">
-              <p>There was an error submiting the form:</p>
-              <p>{error.message}</p>
-            </div>
+            <Box>
+              <Alert variant="filled" severity="error" >
+                <AlertTitle>There was an error submiting the form:</AlertTitle>
+                <strong>{error.message}</strong>
+              </Alert>
+            </Box>
           )}
 
           <Button
@@ -124,7 +128,7 @@ export default function LogIn({ authenticate }) {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Log In
           </Button>
 
           <Grid container>

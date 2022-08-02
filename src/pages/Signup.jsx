@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { signup } from "../services/auth";
 import { useNavigate } from "react-router-dom";
-
 import {
   Button,
   CssBaseline,
@@ -11,10 +10,10 @@ import {
   Box,
   Typography,
   Container,
-  Paper,
+  Alert,
+  AlertTitle
 } from "@mui/material";
 
-import "./auth.css";
 import * as PATHS from "../utils/paths";
 import * as USER_HELPERS from "../utils/userToken";
 
@@ -52,7 +51,7 @@ export default function Signup({ authenticate }) {
       // successful signup
       USER_HELPERS.setUserToken(res.data.accessToken);
       authenticate(res.data.user);
-      navigate(PATHS.HOMEPAGE);
+      navigate("/WelcomeHomePage");
     });
   }
 
@@ -91,8 +90,8 @@ export default function Signup({ authenticate }) {
 
       <Box
         component="form"
-        noValidate
         onSubmit={handleFormSubmission}
+        noValidate
         sx={{ mt: 3 }}
       >
         <Grid container spacing={2}>
@@ -153,10 +152,15 @@ export default function Signup({ authenticate }) {
           </Grid>
 
           {error && (
-            <div className="error-block">
-              <p>There was an error submiting the form:</p>
-              <p>{error.message}</p>
-            </div>
+            <Box
+            item xs={12} sx={{ mt: 3}}
+            >
+            <Alert variant="filled" severity="error" >
+              <AlertTitle>There was an error submiting the form:</AlertTitle>
+              <strong>{error.message}</strong>
+            </Alert>
+          </Box>
+
           )}
         </Grid>
 
@@ -164,6 +168,7 @@ export default function Signup({ authenticate }) {
           type="submit"
           fullWidth
           variant="contained"
+          //href="/welcomeHomePage"
           sx={{ mt: 3, mb: 2 }}
         >
           Sign Up
