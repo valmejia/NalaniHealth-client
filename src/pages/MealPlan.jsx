@@ -77,6 +77,7 @@ function MealPlan() {
               <TableCell align="right">Sat</TableCell>
             </TableRow>
           </TableHead>
+          
           <TableBody>
             {rows.map((row) => (
               <TableRow

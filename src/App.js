@@ -273,7 +273,7 @@ export default function App() {
   return (
     <div>
       {/* <ColorModeContext.Provider value={colorMode}> */}
-        <ThemeProvider t theme={darkMode ?  darkTheme : ligthTheme}>
+        <ThemeProvider theme={darkMode ?  darkTheme : ligthTheme}>
         <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
           {/* <Box>
             <IconButton
