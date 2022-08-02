@@ -4,8 +4,9 @@ import LoadingComponent from "./components/Loading";
 import { getLoggedIn, logout } from "./services/auth";
 import routes from "./config/routes";
 import * as USER_HELPERS from "./utils/userToken";
+import * as React from "react";
 
-//pages 
+//pages
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
@@ -19,68 +20,214 @@ import NutritionGoalTracker from "./pages/NutritionGoalTracker";
 import InspirationBoard from "./pages/InspirationBoard";
 import Favorites from "./pages/Favorites";
 import WelcomeHomePage from "./pages/WelcomeHomePage";
-import { ThemeProvider} from "@emotion/react";
-import { createTheme } from "@mui/material";
-import UserHome from "./pages/UserHome";
 
-const theme = createTheme({
-  palette: {
-    type: 'light',
-    primary: {
-      main: '#6a1b9a',
-    },
-    secondary: {
-      main: '#8e24aa',
-    },
-    text: {
-      primary: '#4527a0',
-    },
-    background: {
-      default: '#dbdaff',
-    },
-  },
-  typography: {
-    h1: {
-      fontFamily: 'Italianno',
-    },
-    h3: {
-      fontFamily: 'Rampart One',
-    },
-    h4: {
-      fontFamily: 'Rampart One',
-    },
-    h2: {
-      fontFamily: 'Poppins',
-    },
-    h5: {
-      fontFamily: 'Poppins',
-    },
-    h6: {
-      fontFamily: 'Poppins',
-    },
-    subtitle1: {
-      fontFamily: 'Poppins',
-    },
-    body2: {
-      fontFamily: 'Poppins',
-    },
-    button: {
-      fontFamily: 'Poppins',
-    },
-    caption: {
-      fontFamily: 'Poppins',
-    },
-    overline: {
-      fontFamily: 'Poppins',
-    },
-  },
-});
+//mui
+
+import { createTheme, ThemeProvider,useTheme, Box, IconButton, Switch } from "@mui/material";
+import UserHome from "./pages/UserHome";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+
+
 
 export default function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [darkMode, setDarkMode] = useState(false);
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#6a1b9a',
+      },
+      secondary: {
+        main: '#8e24aa',
+      },
+      text: {
+        primary: '#dbdaff',
+        secondary: '#dbdaff',
+      },
 
+    },
+    typography: {
+      h1: {
+        fontFamily: 'Italianno',
+      },
+      h3: {
+        fontFamily: 'Rampart One',
+      },
+      h4: {
+        fontFamily: 'Rampart One',
+      },
+      h2: {
+        fontFamily: 'Poppins',
+      },
+      h5: {
+        fontFamily: 'Poppins',
+      },
+      h6: {
+        fontFamily: 'Poppins',
+      },
+      subtitle1: {
+        fontFamily: 'Poppins',
+      },
+      body2: {
+        fontFamily: 'Poppins',
+      },
+      button: {
+        fontFamily: 'Poppins',
+      },
+      caption: {
+        fontFamily: 'Poppins',
+      },
+      overline: {
+        fontFamily: 'Poppins',
+      },
+    },
+  })
+  
+  const ligthTheme = createTheme({
+    palette: {
+      mode:  'light', 
+      primary: {
+        main: '#6a1b9a',
+      },
+      secondary: {
+        main: '#8e24aa',
+      },
+      text: {
+        primary: '#4527a0',
+      },
+      background: {
+        default: '#dbdaff',
+      },
+    },
+    typography: {
+      h1: {
+        fontFamily: 'Italianno',
+      },
+      h3: {
+        fontFamily: 'Rampart One',
+      },
+      h4: {
+        fontFamily: 'Rampart One',
+      },
+      h2: {
+        fontFamily: 'Poppins',
+      },
+      h5: {
+        fontFamily: 'Poppins',
+      },
+      h6: {
+        fontFamily: 'Poppins',
+      },
+      subtitle1: {
+        fontFamily: 'Poppins',
+      },
+      body2: {
+        fontFamily: 'Poppins',
+      },
+      button: {
+        fontFamily: 'Poppins',
+      },
+      caption: {
+        fontFamily: 'Poppins',
+      },
+      overline: {
+        fontFamily: 'Poppins',
+      },
+    },
+  });
+  // const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+
+  // function ToggleColorMode() {
+  //   const [mode, setMode] = React.useState("light");
+    
+  //   const colorMode = React.useMemo(
+  //     () => ({
+  //       toggleColorMode: () => {
+  //         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  //       },
+  //     }),
+  //     []
+  //   );
+
+  //   const theme = React.useMemo(() =>
+  //     createTheme({
+  //       palette: {
+  //         mode,
+  //         ...(mode === "light"
+  //           ? {
+  //               primary: {
+  //                 main: "#6a1b9a",
+  //               },
+  //               secondary: {
+  //                 main: "#8e24aa",
+  //               },
+  //               text: {
+  //                 primary: "#4527a0",
+  //               },
+  //               background: {
+  //                 default: "#dbdaff",
+  //               },
+  //             }
+  //           : {
+  //               primary: {
+  //                 main: "#6a1b9a",
+  //               },
+  //               secondary: {
+  //                 main: "#8e24aa",
+  //               },
+  //               text: {
+  //                 primary: "#dbdaff",
+  //                 secondary: "#dbdaff",
+  //               },
+  //             }),
+  //       },
+  //       typography: {
+  //         h1: {
+  //           fontFamily: "Italianno",
+  //         },
+  //         h3: {
+  //           fontFamily: "Rampart One",
+  //         },
+  //         h4: {
+  //           fontFamily: "Rampart One",
+  //         },
+  //         h2: {
+  //           fontFamily: "Poppins",
+  //         },
+  //         h5: {
+  //           fontFamily: "Poppins",
+  //         },
+  //         h6: {
+  //           fontFamily: "Poppins",
+  //         },
+  //         subtitle1: {
+  //           fontFamily: "Poppins",
+  //         },
+  //         body2: {
+  //           fontFamily: "Poppins",
+  //         },
+  //         button: {
+  //           fontFamily: "Poppins",
+  //         },
+  //         caption: {
+  //           fontFamily: "Poppins",
+  //         },
+  //         overline: {
+  //           fontFamily: "Poppins",
+  //         },
+  //       },
+  //     })
+  //     [mode],
+  //   );
+  // }
+  
+  // const theme = useTheme();
+  // const colorMode = React.useContext(ColorModeContext);
+  
   useEffect(() => {
     const accessToken = USER_HELPERS.getUserToken();
     if (!accessToken) {
@@ -96,7 +243,7 @@ export default function App() {
   }, []);
 
   function handleLogout() {
-    console.log('holi')
+    console.log("holi");
     const accessToken = USER_HELPERS.getUserToken();
     if (!accessToken) {
       setUser(null);
@@ -110,7 +257,7 @@ export default function App() {
       }
       USER_HELPERS.removeUserToken();
       setIsLoading(false);
-      navigate('/')
+      navigate("/");
       return setUser(null);
     });
   }
@@ -123,34 +270,53 @@ export default function App() {
     return <LoadingComponent />;
   }
 
-
   return (
     <div>
+      {/* <ColorModeContext.Provider value={colorMode}> */}
+        <ThemeProvider t theme={darkMode ?  darkTheme : ligthTheme}>
+        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+          {/* <Box>
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={colorMode.toggleColorMode}
+              color="inherit"
+            >
+              {theme.palette.mode === "dark" ? (
+                <Brightness7Icon />
+              ) : (
+                <Brightness4Icon />
+              )}
+            </IconButton>
+          </Box> */}
 
-      <ThemeProvider theme={theme}>
+        
 
-      {/* <Navbar handleLogout={handleLogout} user={user} /> */}
-
-      <Routes>
-        {/* {routes({ user, authenticate, handleLogout }).map((route) => (
+          <Routes>
+            {/* {routes({ user, authenticate, handleLogout }).map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))} */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/auth/login" element={<LogIn  authenticate={authenticate} />} />
-        <Route path="/auth/signup" element={<Signup authenticate={authenticate} />} />
-        <Route path="/mealPlan" element={<MealPlan />} />
-        <Route path="/foodShoppingList" element={<FoodShoppingList />} />
-        <Route path="/recipeIdeasList" element={<RecipeIdeasList />} />
-        <Route path="/recipeIdeasForm" element={<RecipeIdeasForm />} />
-        <Route path="/foodExpensesTracker" element={<FoodExpensesTracker />} />
-        <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
-        <Route path="/inspirationBoard" element={<InspirationBoard />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/WelcomeHomePage" element={<WelcomeHomePage handleLogout={handleLogout} user={user} />} />
-        <Route path="/UserHome" element={<UserHome  user={user}/>} />
-      </Routes>
-
-      </ThemeProvider>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/auth/login"
+              element={<LogIn authenticate={authenticate} />}
+            />
+            <Route
+              path="/auth/signup"
+              element={<Signup authenticate={authenticate} />}
+            />
+            <Route path="/mealPlan" element={<MealPlan />} />
+            <Route path="/foodShoppingList" element={<FoodShoppingList />} />
+            <Route path="/recipeIdeasList" element={<RecipeIdeasList />} />
+            <Route path="/recipeIdeasForm" element={<RecipeIdeasForm />} />
+            <Route path="/foodExpensesTracker" element={<FoodExpensesTracker />} />
+            <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
+            <Route path="/inspirationBoard" element={<InspirationBoard />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/WelcomeHomePage" element={ <WelcomeHomePage handleLogout={handleLogout} user={user} />} />
+            <Route path="/UserHome" element={<UserHome user={user} />} />
+          </Routes>
+        </ThemeProvider>
+      {/* </ColorModeContext.Provider> */}
     </div>
   );
 }
