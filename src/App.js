@@ -307,7 +307,7 @@ export default function App() {
             <Route path="/mealPlan" element={<MealPlan />} />
             <Route path="/foodShoppingList" element={<FoodShoppingList />} />
             <Route path="/recipeIdeasList" element={<RecipeIdeasList />} />
-            <Route path="/recipeIdeasForm" element={<RecipeIdeasForm />} />
+            <Route path="/recipeIdeasForm" element={<RecipeIdeasForm  />} />
             <Route path="/foodExpensesTracker" element={<FoodExpensesTracker />} />
             <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
             <Route path="/inspirationBoard" element={<InspirationBoard />} />

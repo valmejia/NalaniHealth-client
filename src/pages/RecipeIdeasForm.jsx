@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   InputLabel,
   Select,
@@ -13,39 +14,45 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import axios from "axios";
 
-function RecipeIdeasForm() {
-  // const [recipesIdeas, setRecipesIdeas] = useState([]);
-  // const { recipes } = props;
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_SERVER_URL}/recipeIdeasList`)
-  //     .then((data) => data.json())
-  //     .then((recipe) => {
-  //       setRecipesIdeas(recipe);
-  //     })
-  //     .catch(console.log);
-  // }, []);
-  const [name, setName] = useState("");
-  const [food, setFood] = useState("");
-  const [description, setDescription] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [steps, setSteps] = ("");
+function RecipeIdeasForm(props) {
+  const navigate = useNavigate();
+  const [recipesIdeas, setRecipesIdeas] = useState([]);
+  const { recipes } = props;
+  const [form, setForm] = useState({
+    name: "",
+    food: "",
+    description: "",
+    ingredients: "",
+    steps: "",
+  });
+const {  name, food,description, ingredients, steps } = form;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const requestBody = { name, food, description, ingredients, steps };
-    axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/recipesIdeasForm`, requestBody)
-      .then((response) => {
-        setName("");
-        setFood("");
-        setDescription("");
-        setIngredients("");
-        setSteps("");
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    return setForm({ ...form, [name]: value });
+  }
+
+  function handleFormSubmission(event) {
+    event.preventDefault();
+
+    fetch(`${process.env.REACT_APP_SERVER_URL}/recipe/recipeIdeasForm` , {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form)
+  })
+      .then((data) => data.json())
+      .then((recipe) => {
+        setRecipesIdeas(recipe);
+        navigate('/recipeIdeasList')
       })
-      .catch((error) => console.log(error));
-  };
+      .catch(console.log);
+
+  }
+
+  
 
   return (
     <Container>
@@ -61,7 +68,7 @@ function RecipeIdeasForm() {
         </Typography>
       </Box>
 
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
+      <Box component="form" onSubmit={handleFormSubmission} noValidate sx={{ mt: 3 }}>
         <Grid container spacing={{ xs: 2, md: 3 }}>
           <Grid item xs={2} sm={4} md={4}>
             <TextField
@@ -71,10 +78,11 @@ function RecipeIdeasForm() {
               placeholder="Name"
               multiline
               value={name}
+              name='name'
               sx={{
                 marginBottom: 2,
               }}
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleInputChange}
             />
 
             <FormControl fullWidth>
@@ -83,8 +91,9 @@ function RecipeIdeasForm() {
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={food}
+                name='food'
                 label="Type of food"
-                onChange={(e) => setFood(e.target.value)}
+                onChange={handleInputChange}
               >
                 <MenuItem value={"breakfast"}>Breakfast</MenuItem>
                 <MenuItem value={"dinner"}>Dinner</MenuItem>
@@ -116,7 +125,8 @@ function RecipeIdeasForm() {
                 multiline
                 fullWidth
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                name='description'
+                onChange={handleInputChange}
               />
             </Grid>
 
@@ -140,7 +150,8 @@ function RecipeIdeasForm() {
                 multiline
                 fullWidth
                 value={ingredients}
-                onChange={(e) => setIngredients(e.target.value)}
+                name='ingredients'
+                onChange={handleInputChange}
               />
             </Grid>
 
@@ -164,7 +175,8 @@ function RecipeIdeasForm() {
                 multiline
                 fullWidth
                 value={steps}
-                onChange={(e) => setSteps(e.target.value)}
+                name='steps'
+                onChange={handleInputChange}
               />
             </Grid>
           </Grid>
