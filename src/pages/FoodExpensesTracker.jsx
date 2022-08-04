@@ -26,16 +26,21 @@ function FoodExpensesTracker() {
       >
        Food Expenses Tracker 
         </Typography>
+
           <HelperText />
+         
           <TextField
             id="outlined-textarea"
             label="Budget"
             placeholder="Budget"
             multiline
+            sx={{
+              ml: 2,
+            }}
           />
 
-          <Button href="#" variant="contained" sx={{ my: 1, mx: 1.5 }}>
-            Add
+          <Button href="/foodExpensesForm" variant="contained" sx={{ my: 1, mx: 2 }}>
+            Add product
           </Button>
        
       

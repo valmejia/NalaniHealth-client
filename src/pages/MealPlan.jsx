@@ -3,30 +3,11 @@ import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 
 import { 
-  Grid, 
   CssBaseline, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  Table, 
-  Box, 
-  TableHead, 
-  TablePagination, 
-  TableRow, 
-  TableSortLabel, 
-  Toolbar,
   Typography,
-  Paper,
-  Checkbox,
-  IconButton,
-  Tooltip,
-  FormControlLabel,
-  Switch,
   Container
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import { visuallyHidden } from '@mui/utils';
+
 
 function MealPlan() {
 

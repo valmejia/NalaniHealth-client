@@ -1,9 +1,8 @@
 import { CssBaseline, Typography,Container } from "@mui/material";
 function Favorites() {
   return (
-    <Container
-    sx={{ backgroundImage: `url(/nalani.png)`}}
-    >
+    <Container>
+      
       <CssBaseline />
       <Typography
         component="h1"

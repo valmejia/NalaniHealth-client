@@ -6,119 +6,135 @@ import {
   Typography,
   IconButton,
   Toolbar,
-  Avatar, 
+  Avatar,
   Grid,
-  Paper
+  Paper,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-
 function WelcomeHomePage(props) {
-  const {user, handleLogout} = props;
+  const { user, handleLogout } = props;
   return (
-    <Container>
+    <Grid 
+    sx={{
+      margin: 0,
+    }}
+    > 
       <CssBaseline />
-      <Toolbar sx={{ flexWrap: "wrap" }}>
-        <Typography
-          component="h1"
-          variant="h4"
-          noWrap
+
+      <Paper
+        sx={{
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundImage: `url(/foodback.png)`,
+          height: "100vh",
+          margin: 0
+        }}
+        elevation={0}
+      >
+        <Grid
           sx={{
-            variant: "container",
-            flexGrow: 1,
+            margin: 6,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          Welcome {user?.fullname} 
-        </Typography>
+          <Typography component="h1" variant="h4" noWrap>
+            Welcome {user?.fullname}!
+          </Typography>
+        </Grid>
 
-        <Button
-          href="/favorites"
-          variant="contained"
-          sx={{ my: 1, mx: 1.5 }}
-          endIcon={<FavoriteIcon />}
+        <Grid
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
-          Favorites
-        </Button>
+          <Grid
+            sx={{
+              margin: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              href="/recipeIdeasList"
+              variant="contained"
+              size="large"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Recipe Ideas
+            </Button>
 
-        <Button 
+            <Button
+              href="/foodShoppingList"
+              variant="contained"
+              size="large"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Food Shopping List
+            </Button>
+
+            <Button
+              href="/mealPlan"
+              variant="contained"
+              size="large"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Meal Plan
+            </Button>
+          </Grid>
+
+          <Grid
+            sx={{
+              margin: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              href="/foodExpensesTracker"
+              variant="contained"
+              size="large"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Food Expenses Tracker
+            </Button>
+
+            <Button
+              href="/nutritionGoalTracker"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Nutrition Goal Tracker
+            </Button>
+
+            <Button
+              href="/inspirationBoard"
+              variant="contained"
+              size="large"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Inspiration board
+            </Button>
+          </Grid>
+        </Grid>
+      </Paper>
+
+      <Button
         variant="contained"
         sx={{ my: 1, mx: 1.5 }}
         onClick={handleLogout}
-        >
-          LogOut
-        </Button>
-
-        <IconButton  href="/UserHome" sx={{ my: 1, mx: 1.5 }}>
-          <Avatar  src="/broken-image.jpg" />
-        </IconButton>
-
-      </Toolbar>
-
-      <Box
-        sx={{
-          marginTop: 4,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          variant: "container",
-        }}
       >
-
-        <Button
-          href="/recipeIdeasList"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Recipe Ideas
-        </Button>
-
-        <Button
-          href="/foodShoppingList"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Food Shopping List
-        </Button>
-
-        <Button href="/mealPlan" variant="contained" sx={{ mt: 3, mb: 2 }}>
-          Meal Plan
-        </Button>
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          variant: "container",
-        }}
-      >
-        <Button
-          href="/foodExpensesTracker"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Food Expenses Tracker
-        </Button>
-
-        <Button
-          href="/nutritionGoalTracker"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Nutrition Goal Tracker
-        </Button>
-
-        <Button
-          href="/inspirationBoard"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Inspiration board
-        </Button>
-      </Box>
-     
-    </Container>
+        LogOut
+      </Button>
+    </Grid>
   );
 }
 

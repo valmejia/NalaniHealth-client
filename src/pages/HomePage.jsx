@@ -1,14 +1,26 @@
-import { CssBaseline, Grid, Button } from "@mui/material";
-import "../App.css";
-import Navbar from "../components/Navbar";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
+import { CssBaseline, Grid, Button, Typography, Box, Container, Link, Paper } from "@mui/material";
+
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link>Nalani Health</Link>
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 function HomePage() {
+  
   return (
     <Grid sx={{ margin: 0 }}>
       <CssBaseline />
-
       <Paper
         sx={{
           backgroundSize: "cover",
@@ -18,33 +30,56 @@ function HomePage() {
           height: "100vh",
         }}
         elevation={0}
+      />
+     
+      <Box
+        component="footer"
+        sx={{
+          py: 3,
+          px: 2,
+          mt: 'auto',
+          backgroundColor: "#cfceff"
+        }}
       >
-        <Grid
-          sx={{
-            display: "flex",
+        <Container >
+        <Button
+            href="/contactUs"
+          
+            sx={{ 
+            my: 1, 
+            mx: 1.5,  
+            display: 'flex',
             flexDirection: "row",
-            justifyContent:"flex-end",
+            justifyContent:"center"
           }}
-        >
-          <Button
-            href="/auth/login"
-            variant="contained"
-            sx={{ my: 1, mx: 1.5 }}
+          
           >
-            Login
+            <Typography component="h3" variant="h3">
+              About & contact us 
+            </Typography>
+            
           </Button>
-
           <Button
-            href="/auth/signup"
-            variant="contained"
-            sx={{ my: 1, mx: 1.5 }}
-            color="secondary"
+            href="/thankyou"
+          
+            sx={{ 
+            my: 1, 
+            mx: 1.5,  
+            display: 'flex',
+            flexDirection: "row",
+            justifyContent:"center"
+          }}
+          
           >
-            Sign Up
+            <Typography component="h6" variant="h5">
+            Gratefulness
+            </Typography>
+            
           </Button>
           
-        </Grid>
-      </Paper>
+          <Copyright />
+        </Container>
+      </Box>
     </Grid>
   );
 }

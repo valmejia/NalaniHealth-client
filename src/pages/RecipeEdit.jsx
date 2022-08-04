@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import {
   InputLabel,
   Select,
@@ -14,46 +15,47 @@ import {
   Button,
   Grid,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-function RecipeIdeasForm(props) {
-  const navigate = useNavigate();
-  const [recipesIdeas, setRecipesIdeas] = useState([]);
-  const { recipes } = props;
-  const [form, setForm] = useState({
-    name: "",
-    food: "",
-    description: "",
-    ingredients: "",
-    steps: "",
-  });
-const {  name, food,description, ingredients, steps } = form;
-
-  function handleInputChange(event) {
-    const { name, value } = event.target;
-    return setForm({ ...form, [name]: value });
-  }
-
-  function handleFormSubmission(event) {
-    event.preventDefault();
-
-    fetch(`${process.env.REACT_APP_SERVER_URL}/recipe/recipeIdeasForm` , {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(form)
-  })
-      .then((data) => data.json())
-      .then((recipe) => {
-        setRecipesIdeas(recipe);
-        navigate('/recipeIdeasList')
-      })
-      .catch(console.log);
-
-  }
-
+function RecipeEdit() {
+    
+    const { id } = useParams();
+    const [recipe, setRecipe] = useState({});
+    const navigate = useNavigate();
   
-
+    useEffect(() => {
+       fetch(`http://localhost:5005/api/recipe/${id}`)
+         .then((data) => data.json())
+         .then((recipeData) => {
+          console.log(recipeData)
+           setRecipe(recipeData);
+         })
+         .catch(console.log);
+    }, []);
+  
+    function handleInputChange(event) {
+      const { name, value } = event.target;
+  
+      return setRecipe({ ...recipe, [name]: value });
+    }
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      fetch(`http://localhost:5005/api/recipe/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(recipe),
+      })
+        .then((data) => data.json())
+        .then((recipeData) => {
+          setRecipe(recipeData);
+          navigate('/recipeIdeasList')
+        })
+        .catch(console.log);
+    };
+  
   return (
     <Container>
       <CssBaseline />
@@ -63,24 +65,31 @@ const {  name, food,description, ingredients, steps } = form;
           marginTop: 8,
         }}
       >
-        <Typography component="h1" variant="h3">
-          Recipes
-        </Typography>
+       
       </Box>
 
-      <Box component="form" onSubmit={handleFormSubmission} noValidate sx={{ mt: 3 }}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        noValidate
+        sx={{ mt: 3 }}
+      >
+         <Typography component="h1" variant="h3" >
+          Edit {recipe.name}
+        </Typography>
         <Grid spacing={{ xs: 2, md: 3 }}>
           <Grid item xs={2} sm={4} md={4}>
             <TextField
               fullWidth
               id="outlined-textarea"
-              label="Name"
+              
               placeholder="Name"
               multiline
-              value={name}
-              name='name'
+              value={recipe.name}
+              name="name"
               sx={{
                 marginBottom: 2,
+                marginTop: 2
               }}
               onChange={handleInputChange}
             />
@@ -90,15 +99,15 @@ const {  name, food,description, ingredients, steps } = form;
               <Select
                 labelId="demo-select-small"
                 id="demo-select-small"
-                value={food}
-                name='food'
-                label="Type of food"
+                value={recipe.food}
+                name="food"
+               
                 onChange={handleInputChange}
               >
                 <MenuItem value={"breakfast"}>Breakfast</MenuItem>
                 <MenuItem value={"dinner"}>Dinner</MenuItem>
                 <MenuItem value={"drink"}>Drink</MenuItem>
-                <MenuItem value={"lunch"}> Lunch</MenuItem>
+                <MenuItem value={"lunch"}>Lunch</MenuItem>
                 <MenuItem value={"snack"}>Snack</MenuItem>
               </Select>
             </FormControl>
@@ -120,12 +129,12 @@ const {  name, food,description, ingredients, steps } = form;
 
               <TextField
                 id="outlined-textarea"
-                label="Description"
+            
                 placeholder="Description"
                 multiline
                 fullWidth
-                value={description}
-                name='description'
+                value={recipe.description}
+                name="description"
                 onChange={handleInputChange}
               />
             </Grid>
@@ -145,12 +154,12 @@ const {  name, food,description, ingredients, steps } = form;
 
               <TextField
                 id="outlined-textarea"
-                label="Ingredients"
+                
                 placeholder="Ingredients"
                 multiline
                 fullWidth
-                value={ingredients}
-                name='ingredients'
+                value={recipe.ingredients}
+                name="ingredients"
                 onChange={handleInputChange}
               />
             </Grid>
@@ -170,12 +179,12 @@ const {  name, food,description, ingredients, steps } = form;
 
               <TextField
                 id="outlined-textarea"
-                label="Steps"
+               
                 placeholder="Steps"
                 multiline
                 fullWidth
-                value={steps}
-                name='steps'
+                value={recipe.steps}
+                name="steps"
                 onChange={handleInputChange}
               />
             </Grid>
@@ -195,4 +204,4 @@ const {  name, food,description, ingredients, steps } = form;
   );
 }
 
-export default RecipeIdeasForm;
+export default RecipeEdit;

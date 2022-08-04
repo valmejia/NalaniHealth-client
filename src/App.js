@@ -7,7 +7,6 @@ import * as USER_HELPERS from "./utils/userToken";
 import * as React from "react";
 
 //pages
-import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
@@ -15,20 +14,31 @@ import MealPlan from "./pages/MealPlan";
 import FoodShoppingList from "./pages/FoodShoppingList";
 import RecipeIdeasList from "./pages/RecipesIdeasList";
 import RecipeIdeasForm from "./pages/RecipeIdeasForm";
+import RecipeEdit from "./pages/RecipeEdit";
 import FoodExpensesTracker from "./pages/FoodExpensesTracker";
 import NutritionGoalTracker from "./pages/NutritionGoalTracker";
 import InspirationBoard from "./pages/InspirationBoard";
 import Favorites from "./pages/Favorites";
 import WelcomeHomePage from "./pages/WelcomeHomePage";
-
+import FoodShopForm from "./pages/FoodShopForm";
 //mui
 
-import { createTheme, ThemeProvider,useTheme, Box, IconButton, Switch } from "@mui/material";
+import {
+  createTheme,
+  ThemeProvider,
+  useTheme,
+  Box,
+  IconButton,
+  Switch,
+} from "@mui/material";
 import UserHome from "./pages/UserHome";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-
-
+import FoodShopEdit from "./pages/FoodShopEdit";
+import FoodExpensesForm from "./pages/FoodExpensesForm";
+import ContacUS from "./pages/ContactUs";
+import Navbar from "./components/Navbar";
+import Thankyou from "./pages/Thankyou";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -37,105 +47,104 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const darkTheme = createTheme({
     palette: {
-      mode: 'dark',
+      mode: "dark",
       primary: {
-        main: '#6a1b9a',
+        main: "#6a1b9a",
       },
       secondary: {
-        main: '#8e24aa',
+        main: "#8e24aa",
       },
       text: {
-        primary: '#dbdaff',
-        secondary: '#dbdaff',
+        primary: "#dbdaff",
+        secondary: "#dbdaff",
       },
-
     },
     typography: {
       h1: {
-        fontFamily: 'Italianno',
+        fontFamily: "Italianno",
       },
       h3: {
-        fontFamily: 'Rampart One',
+        fontFamily: "Rampart One",
       },
       h4: {
-        fontFamily: 'Rampart One',
+        fontFamily: "Rampart One",
       },
       h2: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       h5: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       h6: {
-        fontFamily: 'Poppins',
+        fontFamily: "Italianno",
       },
       subtitle1: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       body2: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       button: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       caption: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       overline: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
     },
-  })
-  
+  });
+
   const ligthTheme = createTheme({
     palette: {
-      mode:  'light', 
+      mode: "light",
       primary: {
-        main: '#6a1b9a',
+        main: "#6a1b9a",
       },
       secondary: {
-        main: '#8e24aa',
+        main: "#8e24aa",
       },
       text: {
-        primary: '#4527a0',
+        primary: "#4527a0",
       },
       background: {
-        default: '#dbdaff',
+        default: "#dbdaff",
       },
     },
     typography: {
       h1: {
-        fontFamily: 'Italianno',
+        fontFamily: "Italianno",
       },
       h3: {
-        fontFamily: 'Rampart One',
+        fontFamily: "Rampart One",
       },
       h4: {
-        fontFamily: 'Rampart One',
+        fontFamily: "Rampart One",
       },
       h2: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       h5: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       h6: {
-        fontFamily: 'Poppins',
+        fontFamily: "Italianno",
       },
       subtitle1: {
-        fontFamily: 'Poppins',
+        fontFamily: "Italianno",
       },
       body2: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       button: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       caption: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
       overline: {
-        fontFamily: 'Poppins',
+        fontFamily: "Poppins",
       },
     },
   });
@@ -143,7 +152,7 @@ export default function App() {
 
   // function ToggleColorMode() {
   //   const [mode, setMode] = React.useState("light");
-    
+
   //   const colorMode = React.useMemo(
   //     () => ({
   //       toggleColorMode: () => {
@@ -224,10 +233,10 @@ export default function App() {
   //     [mode],
   //   );
   // }
-  
+
   // const theme = useTheme();
   // const colorMode = React.useContext(ColorModeContext);
-  
+
   useEffect(() => {
     const accessToken = USER_HELPERS.getUserToken();
     if (!accessToken) {
@@ -273,9 +282,11 @@ export default function App() {
   return (
     <div>
       {/* <ColorModeContext.Provider value={colorMode}> */}
-        <ThemeProvider theme={darkMode ?  darkTheme : ligthTheme}>
-        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
-          {/* <Box>
+      <ThemeProvider theme={darkMode ? darkTheme : ligthTheme}>
+      <Navbar user={user} />
+       {/* <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} /> */}
+     
+        {/* <Box>
             <IconButton
               sx={{ ml: 1 }}
               onClick={colorMode.toggleColorMode}
@@ -289,33 +300,39 @@ export default function App() {
             </IconButton>
           </Box> */}
 
-        
-
-          <Routes>
-            {/* {routes({ user, authenticate, handleLogout }).map((route) => (
+        <Routes>
+          {/* {routes({ user, authenticate, handleLogout }).map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))} */}
-            <Route path="/" element={<HomePage />} />
-            <Route
-              path="/auth/login"
-              element={<LogIn authenticate={authenticate} />}
-            />
-            <Route
-              path="/auth/signup"
-              element={<Signup authenticate={authenticate} />}
-            />
-            <Route path="/mealPlan" element={<MealPlan />} />
-            <Route path="/foodShoppingList" element={<FoodShoppingList />} />
-            <Route path="/recipeIdeasList" element={<RecipeIdeasList />} />
-            <Route path="/recipeIdeasForm" element={<RecipeIdeasForm  />} />
-            <Route path="/foodExpensesTracker" element={<FoodExpensesTracker />} />
-            <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
-            <Route path="/inspirationBoard" element={<InspirationBoard />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/WelcomeHomePage" element={ <WelcomeHomePage handleLogout={handleLogout} user={user} />} />
-            <Route path="/UserHome" element={<UserHome user={user} />} />
-          </Routes>
-        </ThemeProvider>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/auth/login"
+            element={<LogIn authenticate={authenticate} />}
+          />
+          <Route
+            path="/auth/signup"
+            element={<Signup authenticate={authenticate} />}
+          />
+          <Route path="/mealPlan" element={<MealPlan />} />
+          <Route path="/foodShoppingList" element={<FoodShoppingList />} />
+          <Route path="/foodShopForm" element={<FoodShopForm />} />
+          <Route path="/foodShopEdit" element={<FoodShopEdit />} />
+          <Route path="/foodShopEdit/:id" element={<FoodShopEdit />} />
+          <Route path="/recipeIdeasList" element={<RecipeIdeasList />} />
+          <Route path="/recipeIdeasForm" element={<RecipeIdeasForm />} />
+          <Route path="/recipeEdit/:id" element={<RecipeEdit />} />
+          <Route path="/foodExpensesTracker"element={<FoodExpensesTracker />} />
+          <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
+          <Route path="/inspirationBoard" element={<InspirationBoard />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/WelcomeHomePage" element={<WelcomeHomePage handleLogout={handleLogout} user={user} /> } />
+          <Route path="/UserHome" element={<UserHome user={user} />} />
+          <Route path="/foodExpensesForm" element={<FoodExpensesForm />} />
+          <Route path="/contactUs" element={<ContacUS />} />
+          <Route path="/thankyou" element={<Thankyou />} />
+          
+        </Routes>
+      </ThemeProvider>
       {/* </ColorModeContext.Provider> */}
     </div>
   );

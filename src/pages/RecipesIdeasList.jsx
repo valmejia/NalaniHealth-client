@@ -2,6 +2,7 @@ import * as React from "react";
 import { CssBaseline, Typography, Container, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -11,17 +12,19 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CreateIcon from '@mui/icons-material/Create';
+import CreateIcon from "@mui/icons-material/Create";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function RecipeIdeasList(props) {
-  const [recipeList, setRecipe] = useState([]);
+  const [recipeList, setRecipeList] = useState([]);
   const { Recipes } = props;
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/recipe/recipeIdeasForm`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/recipe/recipeIdeasList`)
       .then((data) => data.json())
       .then((recipeList) => {
-        setRecipe(recipeList);
+        setRecipeList(recipeList);
       })
       .catch(console.log);
   }, []);
@@ -64,11 +67,13 @@ function RecipeIdeasList(props) {
       >
         Add Recipe
       </Button>
-        {recipeList.map((rec) => {
-          return(
-            <Card sx={{ maxWidth: 345 }} key={rec._id}>
-            <CardHeader title={rec.name} /> 
-           
+      <Box sx={{ flexWrap: 'wrap', display: "flex", align: 'center' }}>
+      
+      {recipeList.map((rec) => {
+        return (
+          <Card sx={{ maxWidth: 300, minWidth: 300, margin: 3 }} key={rec._id}>
+            <CardHeader title={rec.name} />
+
             <CardContent>
               <Typography variant="body2" color="text.secondary">
                 {rec.description}
@@ -78,12 +83,17 @@ function RecipeIdeasList(props) {
               <IconButton>
                 <FavoriteIcon />
               </IconButton>
-              <IconButton >
+
+              <IconButton>
                 <DeleteIcon />
               </IconButton>
-              <IconButton >
-                <DeleteIcon />
-              </IconButton>
+
+              <Link to={`/recipeEdit/${rec._id}`}>
+                <IconButton type="submit">
+                  <CreateIcon />
+                </IconButton>
+              </Link>
+
               <ExpandMore
                 expand={expanded}
                 onClick={handleExpandClick}
@@ -95,20 +105,17 @@ function RecipeIdeasList(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
-                <Typography paragraph>
-                  {rec.ingredients}
-                </Typography>
-
-                <Typography paragraph>
-                  {rec.steps}
-                </Typography>
-             
+                <Typography paragraph>Ingredients:</Typography>
+                <Typography paragraph>{rec.ingredients}</Typography>
+                <Typography paragraph>Steps:</Typography>
+                <Typography paragraph>{rec.steps} </Typography>
               </CardContent>
             </Collapse>
           </Card>
-          )
-        })}
-     
+        )
+  
+      })}
+         </Box>
     </Container>
   );
 }

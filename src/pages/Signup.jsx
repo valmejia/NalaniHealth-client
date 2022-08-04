@@ -11,7 +11,8 @@ import {
   Typography,
   Container,
   Alert,
-  AlertTitle
+  AlertTitle,
+  Paper,
 } from "@mui/material";
 
 import * as PATHS from "../utils/paths";
@@ -72,117 +73,145 @@ export default function Signup({ authenticate }) {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main">
       <CssBaseline />
-
-      <Box
+      <Grid
         sx={{
-          marginTop: 8,
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h3">
-          Sign up
-        </Typography>
-      </Box>
-
-      <Box
-        component="form"
-        onSubmit={handleFormSubmission}
-        noValidate
-        sx={{ mt: 3 }}
-      >
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              autoComplete="given-name"
-              name="fullname"
-              fullWidth
-              id="fullname"
-              label="Full Name"
-              autoFocus
-              value={fullname}
-              onChange={handleInputChange}
-              required
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              id="input-username"
-              label="User Name"
-              name="username"
-              autoComplete="username"
-              
-              value={username}
-              onChange={handleInputChange}
-              required
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              value={email}
-              onChange={handleInputChange}
-              required
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="input-password"
-              autoComplete="new-password"
-              value={password}
-              onChange={handleInputChange}
-              required
-              minLength="8"
-            />
-          </Grid>
-
-          {error && (
-            <Box
-            item xs={12} sx={{ mt: 3}}
-            >
-            <Alert variant="filled" severity="error" >
-              <AlertTitle>There was an error submiting the form:</AlertTitle>
-              <strong>{error.message}</strong>
-            </Alert>
+        <Grid>
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography component="h1" variant="h3">
+              Sign up
+            </Typography>
           </Box>
 
-          )}
+          <Box
+            component="form"
+            onSubmit={handleFormSubmission}
+            noValidate
+            sx={{ mt: 3 }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="given-name"
+                  name="fullname"
+                  fullWidth
+                  id="fullname"
+                  label="Full Name"
+                  autoFocus
+                  value={fullname}
+                  onChange={handleInputChange}
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id="input-username"
+                  label="User Name"
+                  name="username"
+                  autoComplete="username"
+                  value={username}
+                  onChange={handleInputChange}
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="input-password"
+                  autoComplete="new-password"
+                  value={password}
+                  onChange={handleInputChange}
+                  required
+                  minLength="8"
+                />
+              </Grid>
+
+              {error && (
+                <Box item xs={12} sx={{ mt: 3 }}>
+                  <Alert variant="filled" severity="error">
+                    <AlertTitle>
+                      There was an error submiting the form:
+                    </AlertTitle>
+                    <strong>{error.message}</strong>
+                  </Alert>
+                </Box>
+              )}
+            </Grid>
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              //href="/welcomeHomePage"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+
+            <Grid container>
+              <Grid item>
+                <Link href="/auth/login" variant="body2">
+                  Already have an account? Log in
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+          <Copyright sx={{ mt: 8, mb: 4 }} />
         </Grid>
 
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          //href="/welcomeHomePage"
-          sx={{ mt: 3, mb: 2 }}
+        <Grid
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            margin: 5,
+          }}
         >
-          Sign Up
-        </Button>
-
-        <Grid container justifyContent="flex-end">
-          <Grid item>
-            <Link href="/auth/login" variant="body2">
-              Already have an account? Log in
-            </Link>
-          </Grid>
+          <Paper
+            sx={{
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              backgroundImage: `url(/ballenita.png)`,
+              height: "600px",
+              width: "600px",
+            }}
+            elevation={0}
+          ></Paper>
         </Grid>
-      </Box>
-      <Copyright sx={{ mt: 5 }} />
+      </Grid>
     </Container>
   );
 }
