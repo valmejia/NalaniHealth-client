@@ -52,6 +52,15 @@ function RecipeIdeasList(props) {
     setExpanded(!expanded);
   };
 
+  const deleteRecipe = function (id){
+    fetch(`${process.env.REACT_APP_SERVER_URL}/recipe/delete/${id}`, {method: 'delete'}) 
+      .then((data) => data.json())
+      .then((recipeList) => {
+      setRecipeList(recipeList);
+      })
+      .catch(console.log);
+  }
+
   return (
     <Container>
       <CssBaseline />
@@ -93,7 +102,11 @@ function RecipeIdeasList(props) {
                     <FavoriteIcon />
                   </IconButton>
 
-                  <IconButton>
+
+                  <IconButton
+                  onClick={()=> deleteRecipe(rec._id)}
+                  >
+
                     <DeleteIcon />
                   </IconButton>
 

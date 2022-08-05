@@ -16,6 +16,12 @@ import {
   Paper,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
+import CreateIcon from "@mui/icons-material/Create";
 
 function FoodExpensesTracker(props) {
   const [amounts, setAmounts] = useState([]);
@@ -78,13 +84,25 @@ function FoodExpensesTracker(props) {
               {amounts.map((row) => (
                 <TableRow
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  key={row._id}
                 >
                   <TableCell component="th" scope="row">
                     {row.name}
                   </TableCell>
 
                   <TableCell align="right">{row.product}</TableCell>
-                  <TableCell align="right">{row.amount}</TableCell>
+
+                  <TableCell align="right">
+                    {row.amount}  
+                    
+                  </TableCell>
+
+                  <Link to={`/foodExpensesEdit/${row._id}`}>
+                    <IconButton type="submit">
+                      <CreateIcon />
+                    </IconButton>
+                  </Link>
+
                 </TableRow>
               ))}
             </TableBody>

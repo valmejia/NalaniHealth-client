@@ -27,7 +27,7 @@ function FoodShopEdit() {
        fetch(`${process.env.REACT_APP_SERVER_URL}/food/${id}`)
          .then((data) => data.json())
          .then((foodData) => {
-          console.log(foodData)
+        
           setFoodShopEdit(foodData);
          })
          .catch(console.log);

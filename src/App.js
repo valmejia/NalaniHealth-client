@@ -17,11 +17,10 @@ import RecipeIdeasList from "./pages/RecipesIdeasList";
 import RecipeIdeasForm from "./pages/RecipeIdeasForm";
 import RecipeEdit from "./pages/RecipeEdit";
 import FoodExpensesTracker from "./pages/FoodExpensesTracker";
-import NutritionGoalTracker from "./pages/NutritionGoalTracker";
-import InspirationBoard from "./pages/InspirationBoard";
 import Favorites from "./pages/Favorites";
 import WelcomeHomePage from "./pages/WelcomeHomePage";
 import FoodShopForm from "./pages/FoodShopForm";
+import FoodExpensesEdit from "./pages/FoodExpensesEdit";
 //mui
 
 import {
@@ -40,6 +39,10 @@ import FoodExpensesForm from "./pages/FoodExpensesForm";
 import ContacUS from "./pages/ContactUs";
 import Navbar from "./components/Navbar";
 import Thankyou from "./pages/Thankyou";
+import MealPlanEdit from "./pages/MealPlanEdit";
+import ToDoToday from "./pages/ToDoToday";
+import ToDoTodayForm from "./pages/ToDoTodayForm";
+import ToDoTodayEdit from "./pages/ToDoTodayEdit";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -285,7 +288,7 @@ export default function App() {
       {/* <ColorModeContext.Provider value={colorMode}> */}
       <ThemeProvider theme={darkMode ? darkTheme : ligthTheme}>
       <Navbar user={user} handleLogout={handleLogout} />
-     <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} /> 
+      <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} /> 
      
         {/* <Box>
             <IconButton
@@ -314,8 +317,17 @@ export default function App() {
             path="/auth/signup"
             element={<Signup authenticate={authenticate} />}
           />
+     {/* mealPlan */}
           <Route path="/mealPlan" element={<MealPlan />} />
           <Route path="/mealPlanForm" element={<MealPlanForm />} />
+          <Route path="/mealPlanEdit/:id" element={<MealPlanEdit/>} />
+
+{/* toDoToday */}
+          <Route path="/toDoTodayEdit/:id" element={<ToDoTodayEdit />} />
+          <Route path="/toDoTodayForm" element={<ToDoTodayForm/>} />
+          <Route path="/toDoToday" element={<ToDoToday />} />
+
+{/* foodShoppingList */}
           <Route path="/foodShoppingList" element={<FoodShoppingList />} />
           <Route path="/foodShopForm" element={<FoodShopForm />} />
           <Route path="/foodShopEdit" element={<FoodShopEdit />} />
@@ -325,13 +337,12 @@ export default function App() {
           <Route path="/recipeEdit/:id" element={<RecipeEdit />} />
           <Route path="/foodExpensesTracker"element={<FoodExpensesTracker />} />
           <Route path="/foodExpensesForm" element={<FoodExpensesForm />} />
-          <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
-          <Route path="/inspirationBoard" element={<InspirationBoard />} />
           <Route path="/favorites" element={<Favorites />} />
-          <Route path="/WelcomeHomePage" element={<WelcomeHomePage handleLogout={handleLogout} user={user} /> } />
+          <Route path="/WelcomeHomePage" element={<WelcomeHomePage user={user} /> } />
           <Route path="/UserHome" element={<UserHome user={user} />} />
           <Route path="/contactUs" element={<ContacUS />} />
           <Route path="/thankyou" element={<Thankyou />} />
+          <Route path="/foodExpensesEdit/:id" element={<FoodExpensesEdit />} />
           
         </Routes>
       </ThemeProvider>

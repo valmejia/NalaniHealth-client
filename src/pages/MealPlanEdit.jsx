@@ -1,74 +1,71 @@
-import {
-  CssBaseline,
-  Grid,
-  Typography,
-  Box,
-  TextField,
-  Select,
-  MenuItem,
-  Button,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
-import HelperText from "../components/Helpertext";
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import {
+  InputLabel,
+  Select,
+  Typography,
+  MenuItem,
+  FormControl,
+  Box,
+  Container,
+  TextField,
+  CssBaseline,
+  Button,
+  Grid,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import HelperText from "../components/Helpertext";
 
-function MealPlanForm(props) {
-    const navigate = useNavigate();
-    const [mealPlan, setMealPlan] = useState([]);
-    const { recipes } = props;
-    const [form, setForm] = useState({
-      recipe: "",
-      days: "",
-      assessment: "",
-      date: "",
-      food: "",
-    });
-  const { recipe, days, assessment, date, food } = form;
-  
-    function handleInputChange(event) {
-      const { name, value } = event.target;
-      return setForm({ ...form, [name]: value });
-    }
-  
-    function handleFormSubmission(event) {
-      event.preventDefault();
-  
-      fetch(`${process.env.REACT_APP_SERVER_URL}/meal/mealPlanForm` , {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(form)
+function MealPlanEdit() {
+  const { id } = useParams();
+  const [mealPlan, setMealPlan] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/meal/${id}`)
+      .then((data) => data.json())
+      .then((Data) => {
+        console.log(Data);
+       setMealPlan(Data);
+      })
+      .catch(console.log);
+  }, []);
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+
+    return setMealPlan({ ...mealPlan, [name]: value });
+  }
+
+  const [recipeList, setRecipeList] = useState([]);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/recipe/recipeIdeasList`)
+      .then((data) => data.json())
+      .then((recipeList) => {
+        setRecipeList(recipeList);
+      })
+      .catch(console.log);
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch(`${process.env.REACT_APP_SERVER_URL}/meal/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(mealPlan),
     })
-        .then((data) => data.json())
-        .then((meal) => {
-          setMealPlan(meal);
-          navigate('/mealPlan')
-        })
-        .catch(console.log);
-  
-    }
-
-    const [recipeList, setRecipeList] = useState([]);
-    useEffect(() => {
-      fetch(`${process.env.REACT_APP_SERVER_URL}/recipe/recipeIdeasList`)
-        .then((data) => data.json())
-        .then((recipeList) => {
-          setRecipeList(recipeList);
-        })
-        .catch(console.log);
-    }, []);
-
-
+      .then((data) => data.json())
+      .then((Data) => {
+        setMealPlan(Data);
+        navigate("/mealPlan");
+      })
+      .catch(console.log);
+  };
   return (
-    <Grid
-      sx={{
-        margin: 4,
-      }}
-    >
+    <Grid sx={{margin: 4}}>
       <CssBaseline />
 
       <Box
@@ -83,10 +80,10 @@ function MealPlanForm(props) {
 
       <Grid
         component="form"
-        onSubmit={handleFormSubmission} noValidate
+        onSubmit={handleSubmit} noValidate
         sx={{ mt: 3 }}
       >
-        <HelperText  fullWidth value={date} name='date'  onChange={((newValue) => setForm({...form, date: newValue}))}/>
+        <HelperText  fullWidth value={mealPlan.date} name='date'  onChange={((newValue) => setMealPlan({...mealPlan, date: newValue}))}/>
 
         <Grid spacing={{ xs: 2, md: 3 }}>
           <Grid item xs={2} sm={4} md={4}>
@@ -100,7 +97,7 @@ function MealPlanForm(props) {
               <Select
                 labelId="demo-select-small"
                 id="demo-select-small"
-                value={recipe}
+                value={mealPlan.recipe}
                 name='recipe'
                 label="recipe"
                 onChange={handleInputChange}
@@ -118,7 +115,7 @@ function MealPlanForm(props) {
               label="Assessment"
               placeholder="Assessment"
               multiline
-              value={assessment}
+              value={mealPlan.assessment}
               name='assessment'
               sx={{
                 marginBottom: 2,
@@ -136,7 +133,7 @@ function MealPlanForm(props) {
               <Select
                 labelId="demo-select-small"
                 id="demo-select-small"
-                value={days}
+                value={mealPlan.days}
                 name='days'
                 label="day"
                 onChange={handleInputChange}
@@ -158,7 +155,7 @@ function MealPlanForm(props) {
               <Select
                 labelId="demo-select-small"
                 id="demo-select-small"
-                value={food}
+                value={mealPlan.food}
                 name="food"
                 label="Type of food"
                 onChange={handleInputChange}
@@ -182,10 +179,9 @@ function MealPlanForm(props) {
           
         </Grid>
       </Grid>
+     
     </Grid>
   );
-
 }
 
-
-export default MealPlanForm;
+export default MealPlanEdit;

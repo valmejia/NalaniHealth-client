@@ -35,25 +35,16 @@ function WelcomeHomePage(props) {
       >
         <Grid
           sx={{
-            margin: 6,
             display: "flex",
             alignItems: "center",
+            flexDirection: "column",
             justifyContent: "center",
           }}
         >
-          <Typography component="h1" variant="h4" noWrap>
+          <Typography component="h1" variant="h3" noWrap sx={{mt: 20}}>
             Welcome {user?.fullname}!
           </Typography>
-        </Grid>
-
-        <Grid
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+       
           <Grid
             sx={{
               margin: 4,
@@ -88,16 +79,7 @@ function WelcomeHomePage(props) {
             >
               Meal Plan
             </Button>
-          </Grid>
-
-          <Grid
-            sx={{
-              margin: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
+        
             <Button
               href="/foodExpensesTracker"
               variant="contained"
@@ -108,32 +90,20 @@ function WelcomeHomePage(props) {
             </Button>
 
             <Button
-              href="/nutritionGoalTracker"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Nutrition Goal Tracker
-            </Button>
-
-            <Button
-              href="/inspirationBoard"
+              href="/toDoToday"
               variant="contained"
               size="large"
               sx={{ mt: 3, mb: 2 }}
             >
-              Inspiration board
+              To-do today
             </Button>
+
+            
+          
           </Grid>
         </Grid>
       </Paper>
 
-      <Button
-        variant="contained"
-        sx={{ my: 1, mx: 1.5 }}
-        onClick={handleLogout}
-      >
-        LogOut
-      </Button>
     </Grid>
   );
 }

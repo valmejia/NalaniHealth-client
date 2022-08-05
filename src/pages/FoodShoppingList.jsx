@@ -11,6 +11,7 @@ import {
   ListItemText,
   Checkbox,
   IconButton,
+  Paper
 } from "@mui/material";
 import * as React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -26,32 +27,47 @@ function FoodShoppingList(props) {
   const [dairyData, setDairyData] = useState([]);
   const [proteinData, setProteinData] = useState([]);
   const [alcoholData, setAlcoholData] = useState([]);
+  const [food, setFoodData] = useState([]);
   const { foods } = props;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/food/foodShoppingList`)
       .then((data) => data.json())
       .then((food) => {
-        const fruits = food.filter((f) => f.product === "fruit");
-        setFruitData(fruits);
+        setFoodData(food);
+      });
+  }, []);
 
-        const vegetables = food.filter((f) => f.product === "vegetables");
-        setVegetablesData(vegetables);
+  useEffect(() => {
+    const fruits = food.filter((f) => f.product === "fruit");
+    setFruitData(fruits);
 
-        const grain = food.filter((f) => f.product === "grain");
-        setGrainData(grain);
+    const vegetables = food.filter((f) => f.product === "vegetables");
+    setVegetablesData(vegetables);
 
-        const dairy = food.filter((f) => f.product === "dairy");
-        setDairyData(dairy);
+    const grain = food.filter((f) => f.product === "grain");
+    setGrainData(grain);
 
-        const protein = food.filter((f) => f.product === "protein");
-        setProteinData(protein);
+    const dairy = food.filter((f) => f.product === "dairy");
+    setDairyData(dairy);
 
-        const alcohol = food.filter((f) => f.product === "alcohol");
-        setAlcoholData(alcohol);
+    const protein = food.filter((f) => f.product === "protein");
+    setProteinData(protein);
+
+    const alcohol = food.filter((f) => f.product === "alcohol");
+    setAlcoholData(alcohol);
+  }, [food]);
+
+  const deleteProduct = function (id) {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/food/delete/${id}`, {
+      method: "delete",
+    })
+      .then((data) => data.json())
+      .then((recipeList) => {
+        setFoodData(food.filter((g) => g._id !== id));
       })
       .catch(console.log);
-  }, []);
+  };
 
   //////////////////////
   const [checked, setChecked] = React.useState([0]);
@@ -91,12 +107,41 @@ function FoodShoppingList(props) {
       >
         Add grocery item
       </Button>
-      <Grid sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', mb: 6}}>
+      <Grid
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          mb: 6,
+        }}
+      >
         {/*/ fruits map */}
-        <Grid sx={{ xs: 2, md: 3, mt:6 }} columns={{ xs: 4 }}>
-          <Typography component="h5" variant="h4" gutterBottom>
-            Fruits
-          </Typography>
+        <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+          <Grid sx={{ 
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: 'center',
+          justifyContent: 'center',
+          mb: 1
+          }} 
+          >
+            <Typography component="h5" variant="h4" gutterBottom>
+              Fruits
+            </Typography>
+            <Paper
+              sx={{
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundImage: `url(/7.png)`,
+                height: "80px",
+                width: "80px",
+                ml: 3,
+              }}
+              elevation={0}
+            />
+          </Grid>
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           >
@@ -121,7 +166,11 @@ function FoodShoppingList(props) {
                       <ListItemText id={labelId} primary={fruit.name} />
                     </ListItemButton>
 
-                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                    <IconButton
+                      edge="end"
+                      sx={{ mr: 0.1 }}
+                      onClick={() => deleteProduct(fruit._id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
 
@@ -143,9 +192,30 @@ function FoodShoppingList(props) {
 
         {/*/ grain map */}
         <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+        <Grid sx={{ 
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: 'center',
+          justifyContent: 'center',
+          mb: 1
+          }} 
+          >
           <Typography component="h5" variant="h4" gutterBottom>
             Grain
           </Typography>
+          <Paper
+              sx={{
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundImage: `url(/12.png)`,
+                height: "80px",
+                width: "80px",
+                ml: 3,
+              }}
+              elevation={0}
+            />
+          </Grid>
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           >
@@ -171,7 +241,11 @@ function FoodShoppingList(props) {
                       <ListItemText id={labelId} primary={grain.name} />
                     </ListItemButton>
 
-                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                    <IconButton
+                      edge="end"
+                      sx={{ mr: 0.1 }}
+                      onClick={() => deleteProduct(grain._id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
 
@@ -193,9 +267,31 @@ function FoodShoppingList(props) {
 
         {/*/ vegetables map */}
         <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+        <Grid sx={{ 
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: 'center',
+          justifyContent: 'center',
+          mb: 1
+          }} 
+          >
           <Typography component="h5" variant="h4" gutterBottom>
             Vegetables
           </Typography>
+          <Paper
+              sx={{
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundImage: `url(/9.png)`,
+                height: "80px",
+                width: "80px",
+                ml: 3,
+              }}
+              elevation={0}
+            />
+          </Grid>
+          
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           >
@@ -220,7 +316,11 @@ function FoodShoppingList(props) {
                       <ListItemText id={labelId} primary={vegetables.name} />
                     </ListItemButton>
 
-                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                    <IconButton
+                      edge="end"
+                      sx={{ mr: 0.1 }}
+                      onClick={() => deleteProduct(vegetables._id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
 
@@ -242,9 +342,32 @@ function FoodShoppingList(props) {
 
         {/* dairy map */}
         <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+        <Grid sx={{ 
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: 'center',
+          justifyContent: 'center',
+          mb: 1
+          }} 
+          >
+
           <Typography component="h5" variant="h4" gutterBottom>
-            Dairy{" "}
+            Dairy
           </Typography>
+            <Paper
+              sx={{
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundImage: `url(/8.png)`,
+                height: "70px",
+                width: "70px",
+                ml: 3,
+              }}
+              elevation={0}
+            />      
+          </Grid>
+
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           >
@@ -270,7 +393,11 @@ function FoodShoppingList(props) {
                       <ListItemText id={labelId} primary={dairy.name} />
                     </ListItemButton>
 
-                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                    <IconButton
+                      edge="end"
+                      sx={{ mr: 0.1 }}
+                      onClick={() => deleteProduct(dairy._id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
 
@@ -292,10 +419,31 @@ function FoodShoppingList(props) {
 
         {/* protein map */}
         <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+        <Grid sx={{ 
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: 'center',
+          justifyContent: 'center',
+          mb: 1
+          }} 
+          >
           <Typography component="h5" variant="h4" gutterBottom>
-            {" "}
-            Protein{" "}
+            Protein
           </Typography>
+          <Paper
+              sx={{
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundImage: `url(/10.png)`,
+                height: "70px",
+                width: "70px",
+                ml: 3,
+              }}
+              elevation={0}
+            />      
+          </Grid>
+
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           >
@@ -321,7 +469,11 @@ function FoodShoppingList(props) {
                       <ListItemText id={labelId} primary={protein.name} />
                     </ListItemButton>
 
-                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                    <IconButton
+                      edge="end"
+                      sx={{ mr: 0.1 }}
+                      onClick={() => deleteProduct(protein._id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
 
@@ -343,10 +495,32 @@ function FoodShoppingList(props) {
 
         {/* alcohol map */}
         <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+        <Grid sx={{ 
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: 'center',
+          justifyContent: 'center',
+          mb: 1
+          }} 
+          >
           <Typography component="h5" variant="h4" gutterBottom>
-            {" "}
-            Alcohol{" "}
+           
+            Alcohol
           </Typography>
+
+          <Paper
+              sx={{
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundImage: `url(/11.png)`,
+                height: "80px",
+                width: "80px",
+                ml: 3,
+              }}
+              elevation={0}
+            />      
+          </Grid>
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           >
@@ -372,7 +546,11 @@ function FoodShoppingList(props) {
                       <ListItemText id={labelId} primary={alcohol.name} />
                     </ListItemButton>
 
-                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                    <IconButton
+                      edge="end"
+                      sx={{ mr: 0.1 }}
+                      onClick={() => deleteProduct(alcohol._id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
 

@@ -100,6 +100,7 @@ const {  name, food,description, ingredients, steps } = form;
                 <MenuItem value={"drink"}>Drink</MenuItem>
                 <MenuItem value={"lunch"}> Lunch</MenuItem>
                 <MenuItem value={"snack"}>Snack</MenuItem>
+                <MenuItem value={"dessert"}> Dessert</MenuItem>
               </Select>
             </FormControl>
           </Grid>

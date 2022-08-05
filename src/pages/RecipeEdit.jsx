@@ -27,7 +27,6 @@ function RecipeEdit() {
        fetch(`${process.env.REACT_APP_SERVER_URL}/recipe/${id}`)
          .then((data) => data.json())
          .then((recipeData) => {
-          console.log(recipeData)
            setRecipe(recipeData);
          })
          .catch(console.log);

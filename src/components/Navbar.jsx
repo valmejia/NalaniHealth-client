@@ -7,15 +7,15 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { IconButton } from "@mui/material";
 
 function Navbar(props) {
-
   const { user, handleLogout } = props;
 
-  console.log(user);
 
   return (
     <React.Fragment>
       <Toolbar sx={{ backgroundColor: "#cfceff" }}>
-        <Grid sx={{ display: "flex", flexDirection: "row", alignItems: 'center' }}>
+        <Grid
+          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+        >
           {!user && (
             <>
               <Link to={"/"}>
@@ -46,42 +46,19 @@ function Navbar(props) {
 
           {user && (
             <>
-            
               <Link to={"/welcomeHomePage"}>
                 <Fab sx={{ margin: 1 }} color="secondary">
                   <HomeIcon />
                 </Fab>
               </Link>
 
-             
-              <Grid
-                sx={{
-                  display: "flex",
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
+              <Button
+                variant="contained"
+                sx={{ my: 1, mx: 1.5 }}
+                onClick={handleLogout}
               >
-                <Button
-                  href="/favorites"
-                  variant="contained"
-                  sx={{ my: 1, mx: 1.5 }}
-                  endIcon={<FavoriteIcon />}
-                >
-                  Favorites
-                </Button>
-
-                <Button
-                  variant="contained"
-                  sx={{ my: 1, mx: 1.5 }}
-                  onClick={handleLogout}
-                >
-                  LogOut
-                </Button>
-
-                <IconButton href="/UserHome" sx={{ my: 1, mx: 1.5 }}>
-                  <Avatar src="/broken-image.jpg" />
-                </IconButton>
-              </Grid>
+                LogOut
+              </Button>
             </>
           )}
         </Grid>
