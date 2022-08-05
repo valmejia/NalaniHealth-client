@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
 import MealPlan from "./pages/MealPlan";
+import MealPlanForm from "./pages/MealPlanForm";
 import FoodShoppingList from "./pages/FoodShoppingList";
 import RecipeIdeasList from "./pages/RecipesIdeasList";
 import RecipeIdeasForm from "./pages/RecipeIdeasForm";
@@ -283,8 +284,8 @@ export default function App() {
     <div>
       {/* <ColorModeContext.Provider value={colorMode}> */}
       <ThemeProvider theme={darkMode ? darkTheme : ligthTheme}>
-      <Navbar user={user} />
-       {/* <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} /> */}
+      <Navbar user={user} handleLogout={handleLogout} />
+     <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} /> 
      
         {/* <Box>
             <IconButton
@@ -314,6 +315,7 @@ export default function App() {
             element={<Signup authenticate={authenticate} />}
           />
           <Route path="/mealPlan" element={<MealPlan />} />
+          <Route path="/mealPlanForm" element={<MealPlanForm />} />
           <Route path="/foodShoppingList" element={<FoodShoppingList />} />
           <Route path="/foodShopForm" element={<FoodShopForm />} />
           <Route path="/foodShopEdit" element={<FoodShopEdit />} />
@@ -322,12 +324,12 @@ export default function App() {
           <Route path="/recipeIdeasForm" element={<RecipeIdeasForm />} />
           <Route path="/recipeEdit/:id" element={<RecipeEdit />} />
           <Route path="/foodExpensesTracker"element={<FoodExpensesTracker />} />
+          <Route path="/foodExpensesForm" element={<FoodExpensesForm />} />
           <Route path="/nutritionGoalTracker" element={<NutritionGoalTracker />} />
           <Route path="/inspirationBoard" element={<InspirationBoard />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/WelcomeHomePage" element={<WelcomeHomePage handleLogout={handleLogout} user={user} /> } />
           <Route path="/UserHome" element={<UserHome user={user} />} />
-          <Route path="/foodExpensesForm" element={<FoodExpensesForm />} />
           <Route path="/contactUs" element={<ContacUS />} />
           <Route path="/thankyou" element={<Thankyou />} />
           

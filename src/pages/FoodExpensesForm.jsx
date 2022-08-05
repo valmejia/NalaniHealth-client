@@ -15,7 +15,39 @@ import {
   Grid,
 } from "@mui/material";
 
-function FoodExpensesForm(){
+function FoodExpensesForm( props){
+  const navigate = useNavigate();
+  const [amounts, setAmounts] = useState([]);
+  const { amoounts } = props;
+  const [form, setForm] = useState({
+    name: "",
+    product: "",
+    amount:""
+  });
+  const { name, product, amount } = form;
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    return setForm({ ...form, [name]: value });
+  }
+
+  function handleFormSubmission(event) {
+    event.preventDefault();
+
+    fetch(`${process.env.REACT_APP_SERVER_URL}/expenses/foodExpensesForm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    })
+      .then((data) => data.json())
+      .then((expens) => {
+        setAmounts(expens);
+        navigate("/foodExpensesTracker");
+      })
+      .catch(console.log);
+  }
     return(
         <Container>
       <CssBaseline />
@@ -34,7 +66,7 @@ function FoodExpensesForm(){
 
       <Box
         component="form"
-        //onSubmit={handleFormSubmission}
+        onSubmit={handleFormSubmission}
         noValidate
         sx={{ mt: 3 }}
       >
@@ -46,12 +78,12 @@ function FoodExpensesForm(){
               label="Name"
               placeholder="Name"
               multiline
-              //value={name}
-              //name="name"
+              value={name}
+              name="name"
               sx={{
                 marginBottom: 2,
               }}
-              //onChange={handleInputChange}
+              onChange={handleInputChange}
             />
          
             <TextField
@@ -61,12 +93,12 @@ function FoodExpensesForm(){
               label="Amount"
               placeholder="Amount"
               multiline
-             // value={amount}
-             // name="amount"
+             value={amount}
+             name="amount"
               sx={{
                 marginBottom: 2,
               }}
-             // onChange={handleInputChange}
+              onChange={handleInputChange}
             />
 
             <FormControl fullWidth>
@@ -74,10 +106,10 @@ function FoodExpensesForm(){
               <Select
                 labelId="demo-select-small"
                 id="demo-select-small"
-               // value={product}
-               // name="product"
+                value={product}
+                name="product"
                 label="Type of food"
-                //onChange={handleInputChange}
+                onChange={handleInputChange}
               >
                 <MenuItem value={"fruit"}>Fruits</MenuItem>
                 <MenuItem value={"vegetables"}>Vegetables</MenuItem>

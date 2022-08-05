@@ -24,7 +24,7 @@ function RecipeEdit() {
     const navigate = useNavigate();
   
     useEffect(() => {
-       fetch(`http://localhost:5005/api/recipe/${id}`)
+       fetch(`${process.env.REACT_APP_SERVER_URL}/recipe/${id}`)
          .then((data) => data.json())
          .then((recipeData) => {
           console.log(recipeData)
@@ -41,7 +41,7 @@ function RecipeEdit() {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      fetch(`http://localhost:5005/api/recipe/${id}`, {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/recipe/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

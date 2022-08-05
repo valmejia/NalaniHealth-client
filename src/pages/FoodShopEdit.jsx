@@ -24,7 +24,7 @@ function FoodShopEdit() {
     const navigate = useNavigate();
   
     useEffect(() => {
-       fetch(`http://localhost:5005/api/food/${id}`)
+       fetch(`${process.env.REACT_APP_SERVER_URL}/food/${id}`)
          .then((data) => data.json())
          .then((foodData) => {
           console.log(foodData)
@@ -41,7 +41,7 @@ function FoodShopEdit() {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      fetch(`http://localhost:5005/api/food/${id}`, {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/food/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -63,13 +63,14 @@ function ContacUS() {
               Valeria Mejía
             </Typography>
 
-            <Typography paragraph variant="h6">
+            <Typography paragraph variant="h5">
               Full stack web developer.
             </Typography>
 
-            <Typography paragraph variant="h6">
+            <Typography paragraph variant="h5">
               Artist: actress, model, visual arts.
             </Typography>
+            
             <Grid>
               <Grid>
                 <Fab sx={{ margin: 1 }} color="secondary" aria-label="add" href='https://www.instagram.com/val_mejiag/'>

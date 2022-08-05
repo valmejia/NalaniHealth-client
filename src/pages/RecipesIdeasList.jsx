@@ -1,5 +1,11 @@
 import * as React from "react";
-import { CssBaseline, Typography, Container, Button } from "@mui/material";
+import {
+  CssBaseline,
+  Typography,
+  Container,
+  Button,
+  Grid,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
@@ -67,55 +73,58 @@ function RecipeIdeasList(props) {
       >
         Add Recipe
       </Button>
-      <Box sx={{ flexWrap: 'wrap', display: "flex", align: 'center' }}>
-      
-      {recipeList.map((rec) => {
-        return (
-          <Card sx={{ maxWidth: 300, minWidth: 300, margin: 3 }} key={rec._id}>
-            <CardHeader title={rec.name} />
-
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                {rec.description}
-              </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-              <IconButton>
-                <FavoriteIcon />
-              </IconButton>
-
-              <IconButton>
-                <DeleteIcon />
-              </IconButton>
-
-              <Link to={`/recipeEdit/${rec._id}`}>
-                <IconButton type="submit">
-                  <CreateIcon />
-                </IconButton>
-              </Link>
-
-              <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
+      <Grid sx={{display: "flex", justifyContent: 'space-evenly', flexWrap: "wrap", }}>
+        {recipeList.map((rec) => {
+          return (
+            
+              <Card
+                sx={{ maxWidth: 300, minWidth: 300, margin: 3 }}
+                key={rec._id}
               >
-                <ExpandMoreIcon />
-              </ExpandMore>
-            </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <CardContent>
-                <Typography paragraph>Ingredients:</Typography>
-                <Typography paragraph>{rec.ingredients}</Typography>
-                <Typography paragraph>Steps:</Typography>
-                <Typography paragraph>{rec.steps} </Typography>
-              </CardContent>
-            </Collapse>
-          </Card>
-        )
-  
-      })}
-         </Box>
+                <CardHeader title={rec.name} />
+
+                <CardContent>
+                  <Typography variant="body2" color="text.secondary">
+                    {rec.description}
+                  </Typography>
+                </CardContent>
+                <CardActions disableSpacing>
+                  <IconButton>
+                    <FavoriteIcon />
+                  </IconButton>
+
+                  <IconButton>
+                    <DeleteIcon />
+                  </IconButton>
+
+                  <Link to={`/recipeEdit/${rec._id}`}>
+                    <IconButton type="submit">
+                      <CreateIcon />
+                    </IconButton>
+                  </Link>
+
+                  <ExpandMore
+                    expand={expanded}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                  >
+                    <ExpandMoreIcon />
+                  </ExpandMore>
+                </CardActions>
+                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                  <CardContent>
+                    <Typography paragraph>Ingredients:</Typography>
+                    <Typography paragraph>{rec.ingredients}</Typography>
+                    <Typography paragraph>Steps:</Typography>
+                    <Typography paragraph>{rec.steps} </Typography>
+                  </CardContent>
+                </Collapse>
+              </Card>
+           
+          );
+        })}
+       </Grid>
     </Container>
   );
 }

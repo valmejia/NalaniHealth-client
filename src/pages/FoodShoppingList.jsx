@@ -91,291 +91,306 @@ function FoodShoppingList(props) {
       >
         Add grocery item
       </Button>
+      <Grid sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', mb: 6}}>
+        {/*/ fruits map */}
+        <Grid sx={{ xs: 2, md: 3, mt:6 }} columns={{ xs: 4 }}>
+          <Typography component="h5" variant="h4" gutterBottom>
+            Fruits
+          </Typography>
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+          >
+            {fruitData.map((fruit) => {
+              const labelId = `checkbox-list-label-${fruit}`;
+              return (
+                <Grid>
+                  <ListItem>
+                    <ListItemButton
+                      role={undefined}
+                      onClick={handleToggle(fruit)}
+                      dense
+                    >
+                      <ListItemIcon>
+                        <Checkbox
+                          edge="start"
+                          checked={checked.indexOf(fruit) !== -1}
+                          tabIndex={-1}
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText id={labelId} primary={fruit.name} />
+                    </ListItemButton>
 
-      {/*/ fruits map */}
-      <Grid sx={{ xs: 2, md: 3 }} columns={{ xs: 4 }}>
-        <Typography>fruits</Typography>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
-          {fruitData.map((fruit) => {
-            const labelId = `checkbox-list-label-${fruit}`;
-            return (
-              <Grid>
-                <ListItem>
-                  <ListItemButton
-                    role={undefined}
-                    onClick={handleToggle(fruit)}
-                    dense
-                  >
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={checked.indexOf(fruit) !== -1}
-                        tabIndex={-1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText id={labelId} primary={fruit.name} />
-                  </ListItemButton>
-
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <Link to={`/foodShopEdit/${fruit._id}`}>
-                    <IconButton type="submit">
-                      <CreateIcon />
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <DeleteIcon />
                     </IconButton>
-                  </Link>
 
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <FavoriteIcon />
-                  </IconButton>
-                </ListItem>
-              </Grid>
-            );
-          })}
-        </List>
-      </Grid>
+                    <Link to={`/foodShopEdit/${fruit._id}`}>
+                      <IconButton type="submit">
+                        <CreateIcon />
+                      </IconButton>
+                    </Link>
 
-      {/*/ grain map */}
-      <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
-        <Typography>grain</Typography>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
-          {grainData.map((grain) => {
-            const labelId = `checkbox-list-label-${grain}`;
-
-            return (
-              <Grid>
-                <ListItem>
-                  <ListItemButton
-                    role={undefined}
-                    onClick={handleToggle(grain)}
-                    dense
-                  >
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={checked.indexOf(grain) !== -1}
-                        tabIndex={-1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText id={labelId} primary={grain.name} />
-                  </ListItemButton>
-
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <Link to={`/foodShopEdit/${grain._id}`}>
-                    <IconButton type="submit">
-                      <CreateIcon />
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <FavoriteIcon />
                     </IconButton>
-                  </Link>
+                  </ListItem>
+                </Grid>
+              );
+            })}
+          </List>
+        </Grid>
 
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <FavoriteIcon />
-                  </IconButton>
-                </ListItem>
-              </Grid>
-            );
-          })}
-        </List>
-      </Grid>
+        {/*/ grain map */}
+        <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+          <Typography component="h5" variant="h4" gutterBottom>
+            Grain
+          </Typography>
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+          >
+            {grainData.map((grain) => {
+              const labelId = `checkbox-list-label-${grain}`;
 
-      {/*/ vegetables map */}
-      <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
-        <Typography>vegetables</Typography>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
-          {vegetablesData.map((vegetables) => {
-            const labelId = `checkbox-list-label-${vegetables}`;
-            return (
-              <Grid>
-                <ListItem>
-                  <ListItemButton
-                    role={undefined}
-                    onClick={handleToggle(vegetables)}
-                    dense
-                  >
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={checked.indexOf(vegetables) !== -1}
-                        tabIndex={-1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText id={labelId} primary={vegetables.name} />
-                  </ListItemButton>
+              return (
+                <Grid>
+                  <ListItem>
+                    <ListItemButton
+                      role={undefined}
+                      onClick={handleToggle(grain)}
+                      dense
+                    >
+                      <ListItemIcon>
+                        <Checkbox
+                          edge="start"
+                          checked={checked.indexOf(grain) !== -1}
+                          tabIndex={-1}
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText id={labelId} primary={grain.name} />
+                    </ListItemButton>
 
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <Link to={`/foodShopEdit/${vegetables._id}`}>
-                    <IconButton type="submit">
-                      <CreateIcon />
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <DeleteIcon />
                     </IconButton>
-                  </Link>
 
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <FavoriteIcon />
-                  </IconButton>
-                </ListItem>
-              </Grid>
-            );
-          })}
-        </List>
-      </Grid>
+                    <Link to={`/foodShopEdit/${grain._id}`}>
+                      <IconButton type="submit">
+                        <CreateIcon />
+                      </IconButton>
+                    </Link>
 
-      {/* dairy map */}
-      <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
-        <Typography>dairy </Typography>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
-          {dairyData.map((dairy) => {
-            const labelId = `checkbox-list-label-${dairy}`;
-
-            return (
-              <Grid>
-                <ListItem>
-                  <ListItemButton
-                    role={undefined}
-                    onClick={handleToggle(dairy)}
-                    dense
-                  >
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={checked.indexOf(dairy) !== -1}
-                        tabIndex={-1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText id={labelId} primary={dairy.name} />
-                  </ListItemButton>
-
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <Link to={`/foodShopEdit/${dairy._id}`}>
-                    <IconButton type="submit">
-                      <CreateIcon />
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <FavoriteIcon />
                     </IconButton>
-                  </Link>
+                  </ListItem>
+                </Grid>
+              );
+            })}
+          </List>
+        </Grid>
 
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <FavoriteIcon />
-                  </IconButton>
-                </ListItem>
-              </Grid>
-            );
-          })}
-        </List>
-      </Grid>
+        {/*/ vegetables map */}
+        <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+          <Typography component="h5" variant="h4" gutterBottom>
+            Vegetables
+          </Typography>
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+          >
+            {vegetablesData.map((vegetables) => {
+              const labelId = `checkbox-list-label-${vegetables}`;
+              return (
+                <Grid>
+                  <ListItem>
+                    <ListItemButton
+                      role={undefined}
+                      onClick={handleToggle(vegetables)}
+                      dense
+                    >
+                      <ListItemIcon>
+                        <Checkbox
+                          edge="start"
+                          checked={checked.indexOf(vegetables) !== -1}
+                          tabIndex={-1}
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText id={labelId} primary={vegetables.name} />
+                    </ListItemButton>
 
-      {/* protein map */}
-      <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
-        <Typography> protein </Typography>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
-          {proteinData.map((protein) => {
-            const labelId = `checkbox-list-label-${protein}`;
-
-            return (
-              <Grid>
-                <ListItem>
-                  <ListItemButton
-                    role={undefined}
-                    onClick={handleToggle(protein)}
-                    dense
-                  >
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={checked.indexOf(protein) !== -1}
-                        tabIndex={-1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText id={labelId} primary={protein.name} />
-                  </ListItemButton>
-
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <Link to={`/foodShopEdit/${protein._id}`}>
-                    <IconButton type="submit">
-                      <CreateIcon />
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <DeleteIcon />
                     </IconButton>
-                  </Link>
 
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <FavoriteIcon />
-                  </IconButton>
-                </ListItem>
-              </Grid>
-            );
-          })}
-        </List>
-      </Grid>
+                    <Link to={`/foodShopEdit/${vegetables._id}`}>
+                      <IconButton type="submit">
+                        <CreateIcon />
+                      </IconButton>
+                    </Link>
 
-      {/* alcohol map */}
-      <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
-        <Typography> alcohol </Typography>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
-          {alcoholData.map((alcohol) => {
-            const labelId = `checkbox-list-label-${alcohol}`;
-
-            return (
-              <Grid>
-                <ListItem>
-                  <ListItemButton
-                    role={undefined}
-                    onClick={handleToggle(alcohol)}
-                    dense
-                  >
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={checked.indexOf(alcohol) !== -1}
-                        tabIndex={-1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText id={labelId} primary={alcohol.name} />
-                  </ListItemButton>
-
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <Link to={`/foodShopEdit/${alcohol._id}`}>
-                    <IconButton type="submit">
-                      <CreateIcon />
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <FavoriteIcon />
                     </IconButton>
-                  </Link>
+                  </ListItem>
+                </Grid>
+              );
+            })}
+          </List>
+        </Grid>
 
-                  <IconButton edge="end" sx={{ mr: 0.1 }}>
-                    <FavoriteIcon />
-                  </IconButton>
-                </ListItem>
-              </Grid>
-            );
-          })}
-        </List>
+        {/* dairy map */}
+        <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+          <Typography component="h5" variant="h4" gutterBottom>
+            Dairy{" "}
+          </Typography>
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+          >
+            {dairyData.map((dairy) => {
+              const labelId = `checkbox-list-label-${dairy}`;
+
+              return (
+                <Grid>
+                  <ListItem>
+                    <ListItemButton
+                      role={undefined}
+                      onClick={handleToggle(dairy)}
+                      dense
+                    >
+                      <ListItemIcon>
+                        <Checkbox
+                          edge="start"
+                          checked={checked.indexOf(dairy) !== -1}
+                          tabIndex={-1}
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText id={labelId} primary={dairy.name} />
+                    </ListItemButton>
+
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <DeleteIcon />
+                    </IconButton>
+
+                    <Link to={`/foodShopEdit/${dairy._id}`}>
+                      <IconButton type="submit">
+                        <CreateIcon />
+                      </IconButton>
+                    </Link>
+
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <FavoriteIcon />
+                    </IconButton>
+                  </ListItem>
+                </Grid>
+              );
+            })}
+          </List>
+        </Grid>
+
+        {/* protein map */}
+        <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+          <Typography component="h5" variant="h4" gutterBottom>
+            {" "}
+            Protein{" "}
+          </Typography>
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+          >
+            {proteinData.map((protein) => {
+              const labelId = `checkbox-list-label-${protein}`;
+
+              return (
+                <Grid>
+                  <ListItem>
+                    <ListItemButton
+                      role={undefined}
+                      onClick={handleToggle(protein)}
+                      dense
+                    >
+                      <ListItemIcon>
+                        <Checkbox
+                          edge="start"
+                          checked={checked.indexOf(protein) !== -1}
+                          tabIndex={-1}
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText id={labelId} primary={protein.name} />
+                    </ListItemButton>
+
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <DeleteIcon />
+                    </IconButton>
+
+                    <Link to={`/foodShopEdit/${protein._id}`}>
+                      <IconButton type="submit">
+                        <CreateIcon />
+                      </IconButton>
+                    </Link>
+
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <FavoriteIcon />
+                    </IconButton>
+                  </ListItem>
+                </Grid>
+              );
+            })}
+          </List>
+        </Grid>
+
+        {/* alcohol map */}
+        <Grid sx={{ xs: 2, md: 3, mt: 6 }} columns={{ xs: 4 }}>
+          <Typography component="h5" variant="h4" gutterBottom>
+            {" "}
+            Alcohol{" "}
+          </Typography>
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+          >
+            {alcoholData.map((alcohol) => {
+              const labelId = `checkbox-list-label-${alcohol}`;
+
+              return (
+                <Grid>
+                  <ListItem>
+                    <ListItemButton
+                      role={undefined}
+                      onClick={handleToggle(alcohol)}
+                      dense
+                    >
+                      <ListItemIcon>
+                        <Checkbox
+                          edge="start"
+                          checked={checked.indexOf(alcohol) !== -1}
+                          tabIndex={-1}
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText id={labelId} primary={alcohol.name} />
+                    </ListItemButton>
+
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <DeleteIcon />
+                    </IconButton>
+
+                    <Link to={`/foodShopEdit/${alcohol._id}`}>
+                      <IconButton type="submit">
+                        <CreateIcon />
+                      </IconButton>
+                    </Link>
+
+                    <IconButton edge="end" sx={{ mr: 0.1 }}>
+                      <FavoriteIcon />
+                    </IconButton>
+                  </ListItem>
+                </Grid>
+              );
+            })}
+          </List>
+        </Grid>
       </Grid>
     </Container>
   );

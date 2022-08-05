@@ -7,6 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { IconButton } from "@mui/material";
 
 function Navbar(props) {
+
   const { user, handleLogout } = props;
 
   console.log(user);

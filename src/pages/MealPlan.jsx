@@ -1,35 +1,36 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { alpha } from "@mui/material/styles";
 
-import { 
-  CssBaseline, 
+import {
+  CssBaseline,
   Typography,
-  Container
-} from '@mui/material';
-
+  Container,
+  TextField,
+  Button,
+  Grid,
+} from "@mui/material";
+import HelperText from "../components/Helpertext";
 
 function MealPlan() {
-
   return (
-    <Container>
+    <Grid sx={{ margin: 5,}}>
       <CssBaseline />
       <Typography
         variant="h4"
         component="h1"
         sx={{
-          marginTop: 4,
+          mb: 4,
           variant: "container",
         }}
       >
         Meal Plan
       </Typography>
-      
-    </Container>
+
+      <Button href="/mealPlanForm" variant="contained" sx={{ my: 1, mx: 2 }}>
+        Add Plan
+      </Button>
+    </Grid>
   );
 }
 export default MealPlan;
-
-
- 
-  
